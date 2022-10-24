@@ -8,14 +8,43 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init(){
+        updateNaviationBarColor()
+    }
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView (){
+            Today()
+                .tabItem {
+                    Image(systemName: "calendar.day.timeline.leading")
+                    Text("Today")
+                }
+            Goals()
+                .tabItem {
+                    Image(systemName: "target")
+                    Text("Goals")
+                }
+            Results()
+                .tabItem {
+                    Image(systemName: "medal.fill")
+                    Text("Results")
+                }
         }
-        .padding()
+        .accentColor(Color("accentTab"))
+        .onAppear(){
+            let appearance = UITabBar.appearance()
+            
+            //appearance.isTranslucent = true
+            appearance.unselectedItemTintColor = UIColor(Color.gray)
+            appearance.backgroundColor = UIColor(Color("mainBackground"))
+        }
+    }
+    
+    func updateNaviationBarColor(){
+        UINavigationBar.appearance().barTintColor = UIColor(Color("mainBackground"))
+        UINavigationBar.appearance().backgroundColor = UIColor(Color("mainBackground"))
     }
 }
 

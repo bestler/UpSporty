@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */; };
+		4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */; };
+		4D00CDC12906A50F00142F83 /* GoalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBE2906A50F00142F83 /* GoalCard.swift */; };
+		4D00CDC22906A50F00142F83 /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBF2906A50F00142F83 /* Sports.swift */; };
+		4D00CDC32906A50F00142F83 /* GoalCardResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC02906A50F00142F83 /* GoalCardResults.swift */; };
+		4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC52906A51500142F83 /* DetailView.swift */; };
+		4D00CDCE2906A51500142F83 /* CircularGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC62906A51500142F83 /* CircularGraph.swift */; };
+		4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC72906A51500142F83 /* Preferences.swift */; };
+		4D00CDD02906A51500142F83 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC82906A51500142F83 /* Goals.swift */; };
+		4D00CDD12906A51500142F83 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDC92906A51500142F83 /* Results.swift */; };
+		4D00CDD22906A51500142F83 /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCA2906A51500142F83 /* ActivitySelection.swift */; };
+		4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCB2906A51500142F83 /* NewGoal.swift */; };
+		4D00CDD42906A51500142F83 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCC2906A51500142F83 /* Today.swift */; };
 		BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601552906A38F005800BF /* NegroniChallengeApp.swift */; };
 		BCF601582906A38F005800BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601572906A38F005800BF /* ContentView.swift */; };
 		BCF6015A2906A38F005800BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF601592906A38F005800BF /* Assets.xcassets */; };
@@ -14,6 +27,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportSelectionArray.swift; sourceTree = "<group>"; };
+		4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularGraphFunctions.swift; sourceTree = "<group>"; };
+		4D00CDBE2906A50F00142F83 /* GoalCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCard.swift; sourceTree = "<group>"; };
+		4D00CDBF2906A50F00142F83 /* Sports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
+		4D00CDC02906A50F00142F83 /* GoalCardResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCardResults.swift; sourceTree = "<group>"; };
+		4D00CDC52906A51500142F83 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		4D00CDC62906A51500142F83 /* CircularGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularGraph.swift; sourceTree = "<group>"; };
+		4D00CDC72906A51500142F83 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		4D00CDC82906A51500142F83 /* Goals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
+		4D00CDC92906A51500142F83 /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		4D00CDCA2906A51500142F83 /* ActivitySelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
+		4D00CDCB2906A51500142F83 /* NewGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoal.swift; sourceTree = "<group>"; };
+		4D00CDCC2906A51500142F83 /* Today.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
 		BCF601522906A38F005800BF /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF601552906A38F005800BF /* NegroniChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegroniChallengeApp.swift; sourceTree = "<group>"; };
 		BCF601572906A38F005800BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +58,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D00CDB72906A4FC00142F83 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		4D00CDBA2906A50600142F83 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		4D00CDBD2906A50F00142F83 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDBE2906A50F00142F83 /* GoalCard.swift */,
+				4D00CDBF2906A50F00142F83 /* Sports.swift */,
+				4D00CDC02906A50F00142F83 /* GoalCardResults.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		4D00CDC42906A51500142F83 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDC52906A51500142F83 /* DetailView.swift */,
+				4D00CDC62906A51500142F83 /* CircularGraph.swift */,
+				4D00CDC72906A51500142F83 /* Preferences.swift */,
+				4D00CDC82906A51500142F83 /* Goals.swift */,
+				4D00CDC92906A51500142F83 /* Results.swift */,
+				4D00CDCA2906A51500142F83 /* ActivitySelection.swift */,
+				4D00CDCB2906A51500142F83 /* NewGoal.swift */,
+				4D00CDCC2906A51500142F83 /* Today.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BCF601492906A38F005800BF = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +118,10 @@
 		BCF601542906A38F005800BF /* NegroniChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				4D00CDC42906A51500142F83 /* Views */,
+				4D00CDBD2906A50F00142F83 /* Structs */,
+				4D00CDBA2906A50600142F83 /* Function */,
+				4D00CDB72906A4FC00142F83 /* Collections */,
 				BCF601552906A38F005800BF /* NegroniChallengeApp.swift */,
 				BCF601572906A38F005800BF /* ContentView.swift */,
 				BCF601592906A38F005800BF /* Assets.xcassets */,
@@ -137,8 +208,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */,
+				4D00CDD42906A51500142F83 /* Today.swift in Sources */,
+				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
+				4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */,
+				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
 				BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */,
+				4D00CDC12906A50F00142F83 /* GoalCard.swift in Sources */,
+				4D00CDD12906A51500142F83 /* Results.swift in Sources */,
+				4D00CDD22906A51500142F83 /* ActivitySelection.swift in Sources */,
+				4D00CDC22906A50F00142F83 /* Sports.swift in Sources */,
+				4D00CDC32906A50F00142F83 /* GoalCardResults.swift in Sources */,
+				4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */,
+				4D00CDCE2906A51500142F83 /* CircularGraph.swift in Sources */,
+				4D00CDD02906A51500142F83 /* Goals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
