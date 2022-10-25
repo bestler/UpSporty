@@ -58,7 +58,7 @@ struct ActivitySelection: View {
                     .ignoresSafeArea()
                 ScrollView {
                     LazyVGrid(columns: numberColumns, spacing: 20){
-                        ForEach(sportSelectionArrayCopy) { sportInstance in
+                        ForEach(searchResults) { sportInstance in
                             ZStack{
                                 Rectangle()
                                     .foregroundColor(Color("cardColor"))
@@ -83,22 +83,32 @@ struct ActivitySelection: View {
                             }
                             .frame(width: screenWidth/3-21, height: screenWidth/3-21)
                         }
-                    }.padding()
+                    }
+                    .searchable(text: $searchText)
+                    .padding()
                 }
                 
             }
             .searchable(text: $searchText, prompt: "Search")
-            .onChange(of: searchText){ sportInstance in
+            /*.onChange(of: searchText){ sportInstance in
                 if !sportInstance.isEmpty {
                     sportSelectionArrayCopy = sportSelectionArray.filter {
                         $0.sportName.contains(sportInstance)}
                 } else {
                     sportSelectionArrayCopy = sportSelectionArray
                 }
-            }
+            }*/
             /*.navigationBarTitle(Text("Activity Selection"), displayMode: .inline)*/
         }
     }
+    
+    var searchResults: [Sport] {
+           if searchText.isEmpty {
+               return sportSelectionArray
+           } else {
+               return sportSelectionArray.filter { $0.sportName.contains(searchText) }
+           }
+       }
 }
 
 

@@ -13,12 +13,6 @@ struct CircularGraphFunctions: View {
     }
 }
 
-struct CircularGraphFunctions_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularGraphFunctions()
-    }
-}
-
 struct Label: View {
     var progress: CGFloat = 0
     var body: some View{
@@ -50,6 +44,7 @@ struct ProgressBar: View{
         }
     }
 }
+
 struct AnimatableNumberModifier: AnimatableModifier {
     var number: Double
     

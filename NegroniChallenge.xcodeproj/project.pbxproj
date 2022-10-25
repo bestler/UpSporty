@@ -20,6 +20,11 @@
 		4D00CDD22906A51500142F83 /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCA2906A51500142F83 /* ActivitySelection.swift */; };
 		4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCB2906A51500142F83 /* NewGoal.swift */; };
 		4D00CDD42906A51500142F83 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDCC2906A51500142F83 /* Today.swift */; };
+		4DCFA3932906D0280076CC93 /* HalfModalTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3922906D0280076CC93 /* HalfModalTodayView.swift */; };
+		4DCFA3952906E1460076CC93 /* LinearGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3942906E1460076CC93 /* LinearGraph.swift */; };
+		4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */; };
+		4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */; };
+		4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B529071F2B0076CC93 /* UIApplication.swift */; };
 		BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601552906A38F005800BF /* NegroniChallengeApp.swift */; };
 		BCF601582906A38F005800BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601572906A38F005800BF /* ContentView.swift */; };
 		BCF6015A2906A38F005800BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF601592906A38F005800BF /* Assets.xcassets */; };
@@ -40,6 +45,11 @@
 		4D00CDCA2906A51500142F83 /* ActivitySelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
 		4D00CDCB2906A51500142F83 /* NewGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGoal.swift; sourceTree = "<group>"; };
 		4D00CDCC2906A51500142F83 /* Today.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		4DCFA3922906D0280076CC93 /* HalfModalTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalTodayView.swift; sourceTree = "<group>"; };
+		4DCFA3942906E1460076CC93 /* LinearGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGraph.swift; sourceTree = "<group>"; };
+		4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGraphFunctions.swift; sourceTree = "<group>"; };
+		4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticomponentPicker.swift; sourceTree = "<group>"; };
+		4DCFA3B529071F2B0076CC93 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		BCF601522906A38F005800BF /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF601552906A38F005800BF /* NegroniChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegroniChallengeApp.swift; sourceTree = "<group>"; };
 		BCF601572906A38F005800BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */,
+				4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -87,16 +98,67 @@
 		4D00CDC42906A51500142F83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4D00CDC52906A51500142F83 /* DetailView.swift */,
-				4D00CDC62906A51500142F83 /* CircularGraph.swift */,
-				4D00CDC72906A51500142F83 /* Preferences.swift */,
-				4D00CDC82906A51500142F83 /* Goals.swift */,
-				4D00CDC92906A51500142F83 /* Results.swift */,
-				4D00CDCA2906A51500142F83 /* ActivitySelection.swift */,
-				4D00CDCB2906A51500142F83 /* NewGoal.swift */,
-				4D00CDCC2906A51500142F83 /* Today.swift */,
+				4DCFA3B7290720C30076CC93 /* MainViews */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4DCFA3B429071F160076CC93 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFA3B529071F2B0076CC93 /* UIApplication.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4DCFA3B7290720C30076CC93 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDCC2906A51500142F83 /* Today.swift */,
+				4D00CDC82906A51500142F83 /* Goals.swift */,
+				4D00CDC92906A51500142F83 /* Results.swift */,
+				4DCFA3B8290720E80076CC93 /* Today Dependent */,
+				4DCFA3BB290721350076CC93 /* Goals Dependent */,
+				4DCFA3B9290721120076CC93 /* Result Dependent */,
+				4DCFA3BC290721780076CC93 /* Extension Views */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		4DCFA3B8290720E80076CC93 /* Today Dependent */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */,
+				4D00CDC72906A51500142F83 /* Preferences.swift */,
+				4DCFA3922906D0280076CC93 /* HalfModalTodayView.swift */,
+			);
+			path = "Today Dependent";
+			sourceTree = "<group>";
+		};
+		4DCFA3B9290721120076CC93 /* Result Dependent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Result Dependent";
+			sourceTree = "<group>";
+		};
+		4DCFA3BB290721350076CC93 /* Goals Dependent */ = {
+			isa = PBXGroup;
+			children = (
+				4D00CDCB2906A51500142F83 /* NewGoal.swift */,
+				4D00CDC52906A51500142F83 /* DetailView.swift */,
+				4D00CDCA2906A51500142F83 /* ActivitySelection.swift */,
+			);
+			path = "Goals Dependent";
+			sourceTree = "<group>";
+		};
+		4DCFA3BC290721780076CC93 /* Extension Views */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFA3942906E1460076CC93 /* LinearGraph.swift */,
+				4D00CDC62906A51500142F83 /* CircularGraph.swift */,
+			);
+			path = "Extension Views";
 			sourceTree = "<group>";
 		};
 		BCF601492906A38F005800BF = {
@@ -118,6 +180,7 @@
 		BCF601542906A38F005800BF /* NegroniChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				4DCFA3B429071F160076CC93 /* Extensions */,
 				4D00CDC42906A51500142F83 /* Views */,
 				4D00CDBD2906A50F00142F83 /* Structs */,
 				4D00CDBA2906A50600142F83 /* Function */,
@@ -210,11 +273,16 @@
 			files = (
 				4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */,
 				4D00CDD42906A51500142F83 /* Today.swift in Sources */,
+				4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */,
 				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
 				4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
+				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
+				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,
+				4DCFA3952906E1460076CC93 /* LinearGraph.swift in Sources */,
 				BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */,
+				4DCFA3932906D0280076CC93 /* HalfModalTodayView.swift in Sources */,
 				4D00CDC12906A50F00142F83 /* GoalCard.swift in Sources */,
 				4D00CDD12906A51500142F83 /* Results.swift in Sources */,
 				4D00CDD22906A51500142F83 /* ActivitySelection.swift in Sources */,

@@ -46,8 +46,10 @@ struct NewGoal: View {
     @State private var selectedTab = Tab.First
     
     private enum Tab {
-        case First, Second, Third, Fourth
+        case First, Second
     }
+    
+    @State var isSearching = false
 
     var body: some View {
         
@@ -55,29 +57,15 @@ struct NewGoal: View {
             ZStack{
                 Color("mainBackground")
                     .ignoresSafeArea()
-                /*VStack{
-                    Section{
-                        Picker(selection: $sportIndex, label:
-                            Text("Sport")
-                        ){
-                            Text("item one")
-                            Text("item one")
-                            Text("item one")
-                        }
-                    }
-                }*/
                 TabView(selection: $selectedTab){
                     ActivitySelection()
                         .tag(Tab.First)
+                        .gesture(DragGesture())
                     Text("Second")
                         .tag(Tab.Second)
-                    Text("Third")
-                        .tag(Tab.Third)
-                    Text("Fourth")
-                        .tag(Tab.Fourth)
+                        .gesture(DragGesture())
                 }
-                //.frame(width: screenWidth, height: screenWidth)
-                .tabViewStyle(.page)
+                .tabViewStyle(PageTabViewStyle())
                 .onAppear {
                     UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
                     UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
@@ -89,15 +77,11 @@ struct NewGoal: View {
                     if self.selectedTab == Tab.First {
                         self.selectedTab = Tab.Second
                     } else if self.selectedTab == Tab.Second{
-                        self.selectedTab = Tab.Third
-                    } else if self.selectedTab == Tab.Third{
-                        self.selectedTab = Tab.Fourth
-                    } else if self.selectedTab == Tab.Fourth{
                         //Add element to Array and...
                         self.showingSheet.toggle()
                     }
                 }) {
-                    if self.selectedTab == Tab.Fourth {
+                    if self.selectedTab == Tab.Second {
                         Text("Done").bold()
                     } else {
                         Text("Next").bold()
@@ -110,10 +94,6 @@ struct NewGoal: View {
                         self.showingSheet.toggle()
                     } else if self.selectedTab == Tab.Second{
                         self.selectedTab = Tab.First
-                    } else if self.selectedTab == Tab.Third{
-                        self.selectedTab = Tab.Second
-                    } else if self.selectedTab == Tab.Fourth{
-                        self.selectedTab = Tab.Third
                     }
                 }) {
                     if self.selectedTab == Tab.First {
@@ -127,8 +107,8 @@ struct NewGoal: View {
     }
 }
 
-/*struct NewGoal_Previews: PreviewProvider {
+struct NewGoal_Previews: PreviewProvider {
     static var previews: some View {
-    NewGoal(showingSheet: self.$showingSheet)
+        NewGoal(showingSheet: Goals().$showingSheet)
     }
-}*/
+}

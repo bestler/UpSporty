@@ -96,7 +96,7 @@ struct Goals: View {
     @State private var showingAlert = false
     @State private var deleteIndexSet: IndexSet?
     
-    @State private var showingSheet = false
+    @State var showingSheet = false
 
     var body: some View {
         ZStack{

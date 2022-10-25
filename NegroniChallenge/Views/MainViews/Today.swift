@@ -11,6 +11,9 @@ struct GoalCardViewToday: View {
     
     var goalCardInstance: GoalCard
     
+    @State var progressZero: CGFloat = -10
+    @State private var numberGraph: Double = 0
+    
     var body: some View {
         VStack{
             HStack(spacing: 0){
@@ -46,21 +49,12 @@ struct GoalCardViewToday: View {
                 Spacer()
             }
             VStack(alignment: .leading) {
-                Text("Goal path percentage: \(Int(goalCardInstance.progress))%")
-                    .foregroundColor(Color("grayText"))
-                ZStack(alignment: .leading) {
-                    
-                    // The main rectangle
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray)
-                        .frame(width: 300,
-                               height: 10)
-                    
-                    // The progress indicator...
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(goalCardInstance.sportColor)
-                        .frame(width: 300 * goalCardInstance.progress / 100,
-                               height: 10)
+                LinearGraph(progress: goalCardInstance.progress, colored: goalCardInstance.sportColor)
+                .onAppear() {
+                    withAnimation(.spring(response: 0.8, dampingFraction: 0.9, blendDuration:100)) {
+                        progressZero = goalCardInstance.progress
+                        numberGraph = goalCardInstance.progress + 0
+                    }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
@@ -97,12 +91,15 @@ struct Today: View {
 
     @State private var midY: CGFloat = 0.0
     
+    @State var showHalfSheet: Bool = false
+
     var body: some View {
         ZStack{
             Color("mainBackground")
                 .ignoresSafeArea()
             NavigationStack{
                 if(goalCardAtAll.isEmpty) {
+                    
                     
                     ZStack {
                         Color("mainBackground")
@@ -152,6 +149,13 @@ struct Today: View {
                                                 Image(systemName: "plus.circle")
                                                     .foregroundColor(Color("blackText"))
                                                     .font(.system(size: 40))
+                                                    .onTapGesture {
+                                                        showHalfSheet.toggle()
+                                                    }
+                                                    .sheet(isPresented: $showHalfSheet, content: {
+                                                        HalfModalTodayView(showHalfSheet: self.$showHalfSheet)
+                                                            .presentationDetents([.large, .medium, .fraction(0.55)])
+                                                    })
                                                 VStack(alignment: .leading){
                                                     Text("Excercise 5x200mt")
                                                         .foregroundColor(Color("blackText"))
