@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40A0357E2907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld */; };
+		40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A035822907E8F50059F4E8 /* CoreDataManager.swift */; };
 		4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */; };
 		4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */; };
 		4D00CDC12906A50F00142F83 /* GoalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBE2906A50F00142F83 /* GoalCard.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		40A0357F2907E07E0059F4E8 /* CoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		40A035822907E8F50059F4E8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportSelectionArray.swift; sourceTree = "<group>"; };
 		4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularGraphFunctions.swift; sourceTree = "<group>"; };
 		4D00CDBE2906A50F00142F83 /* GoalCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCard.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		40A035812907E83F0059F4E8 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				40A035822907E8F50059F4E8 /* CoreDataManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
+				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
 				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
 				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,
