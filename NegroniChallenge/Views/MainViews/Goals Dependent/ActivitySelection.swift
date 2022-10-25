@@ -60,10 +60,11 @@ struct ActivitySelection: View {
                     Text("Select Activity")
                         .foregroundColor(Color("blackText"))
                         .font(.system(size: 26))
+                        .padding(.top, 15)
                         .bold()
                     Text("Select the sport of your new goal")
                         .foregroundColor(Color("blackText"))
-                        .font(.system(size: 18))
+                        .font(.system(size: 16))
                     ScrollView {
                         LazyVGrid(columns: numberColumns, spacing: 20){
                             ForEach(searchResults) { sportInstance in
