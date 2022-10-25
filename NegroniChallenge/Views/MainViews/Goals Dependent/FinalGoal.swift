@@ -12,6 +12,10 @@ struct FinalGoal: View {
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    @State private var date = Date()
+    
+    @ObservedObject var input = NumbersOnly()
+    
     var body: some View {
         NavigationStack{
             
@@ -32,52 +36,69 @@ struct FinalGoal: View {
                     VStack(alignment: .leading){
                         Text("Set your final goal date")
                             .foregroundColor(Color("grayText"))
-                            .font(.system(size: 16))
+                            .font(.system(size: 14))
                             .bold()
-                        VStack{
-                            Text("fuibfriubfvr")
-                                .foregroundColor(Color("blackText"))
-                                .font(.system(size: 26))
-                            Text("fuibfriubfvr")
-                                .foregroundColor(Color("blackText"))
-                                .font(.system(size: 26))
+                        HStack {
+                            Image(systemName: "calendar")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20)
+                            DatePicker(
+                                    "Start Date",
+                                    selection: $date,
+                                    displayedComponents: [.date]
+                            )
                         }
-                        .frame(width: screenWidth - 90, height: 40)
                         .padding(20)
                         .background(Color("cardColor"))
                         .cornerRadius(20)
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 25)
                     VStack(alignment: .leading){
                         Text("Set your final goal metrics to reach")
                             .foregroundColor(Color("grayText"))
-                            .font(.system(size: 16))
+                            .font(.system(size: 14))
                             .bold()
                         VStack{
                             HStack {
+                                Image(systemName: "figure.stand.line.dotted.figure.stand")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20)
                                 Text("Distance")
                                     .foregroundColor(Color("grayText"))
-                                .font(.system(size: 20))
+                                    .font(.system(size: 20))
                                 Spacer()
-                                Text("fuibfriubfvr")
+                                TextField("Mt", text: $input.value)
+                                    .keyboardType(.decimalPad)
+                                
+                                    .disableAutocorrection(true)
+                                    .multilineTextAlignment(.trailing)
                                     .foregroundColor(Color("blackText"))
-                                .font(.system(size: 26))
+                                    .font(.system(size: 20))
                             }
+                            .padding(.bottom, 20)
                             HStack {
+                                Image(systemName: "timer")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20)
                                 Text("Time")
                                     .foregroundColor(Color("grayText"))
-                                .font(.system(size: 16))
+                                    .font(.system(size: 20))
                                 Spacer()
-                                Text("fuibfriubfvr")
+                                Text("Picker here")
                                     .foregroundColor(Color("blackText"))
-                                .font(.system(size: 26))
+                                    .font(.system(size: 20))
                             }
                             
                         }
-                        .frame(width: screenWidth - 90, height: 40)
                         .padding(20)
                         .background(Color("cardColor"))
                         .cornerRadius(20)
                     }
+                    .padding(.horizontal, 20)
                     Spacer()
                 }
                 
@@ -90,5 +111,17 @@ struct FinalGoal: View {
 struct FinalGoal_Previews: PreviewProvider {
     static var previews: some View {
         FinalGoal()
+    }
+}
+
+class NumbersOnly: ObservableObject {
+    @Published var value = "" {
+        didSet {
+            let filtered = value.filter { $0.isNumber }
+            
+            if value != filtered {
+                value = filtered
+            }
+        }
     }
 }

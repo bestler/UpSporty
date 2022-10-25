@@ -51,13 +51,19 @@ struct ActivitySelection: View {
                                             :
                                             nil
                                         )
-                                    VStack {
+                                    VStack(alignment: .center){
                                         Image(systemName: sportInstance.sportIcon)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
                                             .foregroundColor(sportInstance.sportColor)
-                                            .font(.system(size: 45))
+                                            .padding(.top, 28)
+                                            //.font(.system(size: 45))
+                                        Spacer()
                                         Text("\(sportInstance.sportName.rawValue)")
                                             .foregroundColor(Color("blackText"))
                                             .font(.system(size: 14, weight: .medium, design: .rounded))
+                                            .padding(.bottom, 12)
                                     }
                                 }
                                 .onTapGesture {
