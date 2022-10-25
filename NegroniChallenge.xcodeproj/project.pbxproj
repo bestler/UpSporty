@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40A0357E2907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld */; };
 		4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */; };
 		4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */; };
 		4D00CDC12906A50F00142F83 /* GoalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D00CDBE2906A50F00142F83 /* GoalCard.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40A0357F2907E07E0059F4E8 /* CoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		4D00CDB82906A4FC00142F83 /* sportSelectionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportSelectionArray.swift; sourceTree = "<group>"; };
 		4D00CDBB2906A50600142F83 /* CircularGraphFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularGraphFunctions.swift; sourceTree = "<group>"; };
 		4D00CDBE2906A50F00142F83 /* GoalCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCard.swift; sourceTree = "<group>"; };
@@ -70,6 +72,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40A035812907E83F0059F4E8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		4D00CDB72906A4FC00142F83 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,12 +192,14 @@
 		BCF601542906A38F005800BF /* NegroniChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				40A035812907E83F0059F4E8 /* Manager */,
 				4DCFA3B429071F160076CC93 /* Extensions */,
 				4D00CDC42906A51500142F83 /* Views */,
 				4D00CDBD2906A50F00142F83 /* Structs */,
 				4D00CDBA2906A50600142F83 /* Function */,
 				4D00CDB72906A4FC00142F83 /* Collections */,
 				BCF601552906A38F005800BF /* NegroniChallengeApp.swift */,
+				40A0357E2907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld */,
 				BCF601572906A38F005800BF /* ContentView.swift */,
 				BCF601592906A38F005800BF /* Assets.xcassets */,
 				BCF6015B2906A38F005800BF /* Preview Content */,
@@ -282,6 +293,7 @@
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
 				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
+				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
 				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,
 				4DCFA3952906E1460076CC93 /* LinearGraph.swift in Sources */,
 				BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */,
@@ -495,6 +507,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		40A0357E2907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				40A0357F2907E07E0059F4E8 /* CoreDataContainer.xcdatamodel */,
+			);
+			currentVersion = 40A0357F2907E07E0059F4E8 /* CoreDataContainer.xcdatamodel */;
+			path = CoreDataContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BCF6014A2906A38F005800BF /* Project object */;
 }
