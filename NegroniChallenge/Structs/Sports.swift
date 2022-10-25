@@ -7,11 +7,36 @@
 
 import SwiftUI
 
-struct Sport: Identifiable{
-    let id = UUID()
+enum SportsName: String {
+    case running = "Running"
+    case swimming = "Swimming"
+}
+
+struct SportModel: Identifiable{
+    let id: Int
+    var sportIcon: String {
+        switch sportName {
+        case .running:
+            return "figure.run"
+        case .swimming:
+            return "figure.pool.swim"
+        }
+    }
+    let sportName: SportsName
+    var sportColor: Color {
+        switch sportName {
+        case .running:
+            return .green
+        case .swimming:
+            return .cyan
+        }
+        
+    }
     
-    var sportIcon: String
-    var sportName: String
-    var sportColor: Color
-    var isSelected: Bool
+    static var allSports: [SportModel] { [
+        SportModel(id: 1, sportName: .running),
+        SportModel(id: 2, sportName: .swimming)
+    ]
+        
+    }
 }

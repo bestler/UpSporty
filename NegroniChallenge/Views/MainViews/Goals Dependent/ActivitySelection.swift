@@ -7,34 +7,13 @@
 
 import SwiftUI
 
-var sportSelectionArray = [
-    Sport(
-        sportIcon: "figure.run",
-        sportName: "Running",
-        sportColor: .green,
-        isSelected: false
-    ),
-    Sport(
-        sportIcon: "figure.archery",
-        sportName: "Archery",
-        sportColor: .yellow,
-        isSelected: false
-    ),
-    Sport(
-        sportIcon: "figure.track.and.field",
-        sportName: "Obstacles",
-        sportColor: .blue,
-        isSelected: false
-    ),
-    Sport(
-        sportIcon: "figure.mind.and.body",
-        sportName: "Meditation",
-        sportColor: .red,
-        isSelected: false
-    ),
-]
 
 struct ActivitySelection: View {
+    @EnvironmentObject var vm: MainViewModel
+    
+    //@State var sportSelectionArrayCopy = sportSelectionArray
+    @State private var searchText = ""
+    @State var isActivitySelected: Bool = false
     
     private let numberColumns = [
         GridItem(.flexible()),
@@ -44,12 +23,6 @@ struct ActivitySelection: View {
     
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    
-    @State var sportSelectionArrayCopy = sportSelectionArray
-    
-    @State private var searchText = ""
-    
-    @State var isActivitySelected: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -81,7 +54,7 @@ struct ActivitySelection: View {
                                         Image(systemName: sportInstance.sportIcon)
                                             .foregroundColor(sportInstance.sportColor)
                                             .font(.system(size: 45))
-                                        Text("\(sportInstance.sportName)")
+                                        Text("\(sportInstance.sportName.rawValue)")
                                             .foregroundColor(Color("blackText"))
                                             .font(.system(size: 14, weight: .medium, design: .rounded))
                                     }
@@ -111,11 +84,11 @@ struct ActivitySelection: View {
         }
     }
     
-    var searchResults: [Sport] {
+    var searchResults: [SportModel] {
            if searchText.isEmpty {
-               return sportSelectionArray
+               return vm.allSports
            } else {
-               return sportSelectionArray.filter { $0.sportName.contains(searchText) }
+               return vm.allSports.filter { $0.sportName .rawValue.contains(searchText) }
            }
        }
     

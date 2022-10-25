@@ -8,37 +8,12 @@
 import SwiftUI
 
 struct NewGoal: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     @State private var sportIndex = 0
     
     @Binding var showingSheet: Bool
     
-    @State var sportSelectionArray = [
-        Sport(
-            sportIcon: "figure.run",
-            sportName: "Running",
-            sportColor: .green,
-            isSelected: false
-        ),
-        Sport(
-            sportIcon: "figure.archery",
-            sportName: "Archery",
-            sportColor: .yellow,
-            isSelected: false
-        ),
-        Sport(
-            sportIcon: "figure.track.and.field",
-            sportName: "Obstacle Course",
-            sportColor: .blue,
-            isSelected: false
-        ),
-        Sport(
-            sportIcon: "figure.mind.and.body",
-            sportName: "Meditation",
-            sportColor: .red,
-            isSelected: false
-        ),
-    ]
+    
     
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height

@@ -66,16 +66,15 @@ struct GoalCardViewToday: View {
 import SwiftUI
 
 struct Today: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     @State var goalCardAtAll = [
         GoalCard(
             sportIcon: "figure.run",
             sportColor: .green,
             sportName: "Running",
             targetIcon: "flag",
-            target: 2000,
+            clockIcon: "stopwatch", target: 2000,
             targetMeasure: "mt",
-            clockIcon: "stopwatch",
             targetTime: Int(2.00),
             targetTimeMeaseure: "mins",
             isCompleted: false,
@@ -161,7 +160,7 @@ struct Today: View {
                                                         .foregroundColor(Color("blackText"))
                                                         .font(.system(size: 20))
                                                         .bold()
-                                                    Text("Repeat")
+                                                    Text(/*"Repeat"*/ vm.test)
                                                         .foregroundColor(Color("grayText"))
                                                         .font(.system(size: 16))
                                                     Text("2/5")
@@ -207,5 +206,6 @@ struct Today: View {
 struct Today_Previews: PreviewProvider {
     static var previews: some View {
         Today()
+            .environmentObject(MainViewModel())
     }
 }

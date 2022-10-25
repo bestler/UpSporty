@@ -28,27 +28,32 @@ class Utilities {
 
 struct ContentView: View {
     
+    @EnvironmentObject var vm: MainViewModel
+    
     init(){
         updateNaviationBarColor()
     }
     
     var body: some View {
-        TabView (){
+        TabView {
             Today()
                 .tabItem {
                     Image(systemName: "calendar.day.timeline.leading")
                     Text("Today")
                 }
+                .environmentObject(vm)
             Goals()
                 .tabItem {
                     Image(systemName: "target")
                     Text("Goals")
                 }
+                .environmentObject(vm)
             Results()
                 .tabItem {
                     Image(systemName: "medal.fill")
                     Text("Results")
                 }
+                .environmentObject(vm)
         }
         .accentColor(Color("accentTab"))
         .onAppear(){

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GoalCardView: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
@@ -55,16 +55,15 @@ struct GoalCardView: View {
 }
 
 struct Goals: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     @State var goalCardAtAll = [
         GoalCard(
             sportIcon: "figure.run",
             sportColor: .green,
             sportName: "Running",
             targetIcon: "flag",
-            target: 2000,
+            clockIcon: "stopwatch", target: 2000,
             targetMeasure: "mt",
-            clockIcon: "stopwatch",
             targetTime: Int(2.00),
             targetTimeMeaseure: "mins",
             isCompleted: false,
@@ -77,9 +76,8 @@ struct Goals: View {
             sportColor: .yellow,
             sportName: "Archery",
             targetIcon: "flag",
-            target: 130,
+            clockIcon: "stopwatch", target: 130,
             targetMeasure: "pt",
-            clockIcon: "stopwatch",
             targetTime: Int(0),
             targetTimeMeaseure: "--",
             isCompleted: false,
@@ -161,6 +159,7 @@ struct Goals: View {
                         }
                         .sheet(isPresented: $showingSheet) {
                             NewGoal(showingSheet: self.$showingSheet)
+                                .environmentObject(vm)
                         }
                     }
                 }
