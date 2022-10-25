@@ -56,36 +56,45 @@ struct ActivitySelection: View {
             ZStack{
                 Color("mainBackground")
                     .ignoresSafeArea()
-                ScrollView {
-                    LazyVGrid(columns: numberColumns, spacing: 20){
-                        ForEach(searchResults) { sportInstance in
-                            ZStack{
-                                Rectangle()
-                                    .foregroundColor(Color("cardColor"))
-                                    .cornerRadius(20)
-                                    .overlay( isActivitySelected ?
-                                        RoundedRectangle(cornerRadius: 20)
-                                        .stroke(sportInstance.sportColor, lineWidth: 4)
-                                        :
-                                        nil
-                                    )
-                                VStack {
-                                    Image(systemName: sportInstance.sportIcon)
-                                        .foregroundColor(sportInstance.sportColor)
-                                        .font(.system(size: 45))
-                                    Text("\(sportInstance.sportName)")
-                                        .foregroundColor(Color("blackText"))
-                                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                VStack {
+                    Text("Select Activity")
+                        .foregroundColor(Color("blackText"))
+                        .font(.system(size: 26))
+                        .bold()
+                    Text("Select the sport of your new goal")
+                        .foregroundColor(Color("blackText"))
+                        .font(.system(size: 18))
+                    ScrollView {
+                        LazyVGrid(columns: numberColumns, spacing: 20){
+                            ForEach(searchResults) { sportInstance in
+                                ZStack{
+                                    Rectangle()
+                                        .foregroundColor(Color("cardColor"))
+                                        .cornerRadius(20)
+                                        .overlay( isActivitySelected ?
+                                            RoundedRectangle(cornerRadius: 20)
+                                            .stroke(sportInstance.sportColor, lineWidth: 4)
+                                            :
+                                            nil
+                                        )
+                                    VStack {
+                                        Image(systemName: sportInstance.sportIcon)
+                                            .foregroundColor(sportInstance.sportColor)
+                                            .font(.system(size: 45))
+                                        Text("\(sportInstance.sportName)")
+                                            .foregroundColor(Color("blackText"))
+                                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                                    }
                                 }
+                                .onTapGesture {
+                                    isActivitySelected.toggle()
+                                }
+                                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                                .frame(width: screenWidth/3-21, height: screenWidth/3-21)
                             }
-                            .onTapGesture {
-                                isActivitySelected.toggle()
-                            }
-                            .frame(width: screenWidth/3-21, height: screenWidth/3-21)
                         }
+                        .padding()
                     }
-                    .searchable(text: $searchText)
-                    .padding()
                 }
                 
             }
@@ -109,6 +118,8 @@ struct ActivitySelection: View {
                return sportSelectionArray.filter { $0.sportName.contains(searchText) }
            }
        }
+    
+    
 }
 
 

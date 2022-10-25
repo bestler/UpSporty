@@ -57,18 +57,18 @@ struct NewGoal: View {
             ZStack{
                 Color("mainBackground")
                     .ignoresSafeArea()
-                TabView(selection: $selectedTab){
-                    ActivitySelection()
-                        .tag(Tab.First)
-                        .gesture(DragGesture())
-                    Text("Second")
-                        .tag(Tab.Second)
-                        .gesture(DragGesture())
-                }
-                .tabViewStyle(PageTabViewStyle())
-                .onAppear {
-                    UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
-                    UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
+                    TabView(selection: $selectedTab){
+                        ActivitySelection()
+                            .tag(Tab.First)
+                            .gesture(DragGesture())
+                        FinalGoal()
+                            .tag(Tab.Second)
+                            .gesture(DragGesture())
+                    }
+                    .tabViewStyle(PageTabViewStyle())
+                    .onAppear {
+                        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
+                        UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                 }
             }
             .navigationBarTitle(Text("New Goal"), displayMode: .inline)
