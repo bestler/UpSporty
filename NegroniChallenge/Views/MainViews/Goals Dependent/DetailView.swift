@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     
-    var detail: GoalCard
+    let detail: GoalEntity
     
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -22,7 +22,7 @@ struct DetailView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 20) {
                     TabView {
-                        CircularGraph(progress: detail.progress, colored: detail.sportColor)
+                      //  CircularGraph(progress: detail.progress, colored: detail.sportColor)
                         Text("Second")
                         Text("Third")
                         Text("Fourth")
@@ -34,12 +34,12 @@ struct DetailView: View {
                         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                     }
                     Spacer()
-                    Text("\(detail.sportName)")
+                    Text("Sportname") //\(detail.sportName)
                         .font(.system(size: 20))
                     
                 }
             }
-            .navigationBarTitle(Text("\(detail.sportName)"), displayMode: .inline)
+            .navigationBarTitle(Text("Sport title"), displayMode: .inline) //\(detail.sportName)
             .navigationBarItems(trailing:
                 Button(action: {
                 
@@ -53,18 +53,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(detail: GoalCard(
-            sportIcon: "figure.run",
-            sportColor: .green,
-            sportName: "Running",
-            targetIcon: "flag",
-            clockIcon: "stopwatch", target: 2000,
-            targetMeasure: "mt",
-            targetTime: Int(2.00),
-            targetTimeMeaseure: "min",
-            isCompleted: false,
-            yearCompletion: 0,
-            progress: 71
-        ))
+        DetailView(detail: GoalEntity())
     }
 }

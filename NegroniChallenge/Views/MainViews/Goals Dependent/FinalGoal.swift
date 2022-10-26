@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FinalGoal: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
@@ -45,7 +45,7 @@ struct FinalGoal: View {
                                 .frame(width: 20)
                             DatePicker(
                                     "Start Date",
-                                    selection: $date,
+                                    selection: $vm.dueDate,
                                     displayedComponents: [.date]
                             )
                         }
@@ -70,7 +70,7 @@ struct FinalGoal: View {
                                     .foregroundColor(Color("grayText"))
                                     .font(.system(size: 20))
                                 Spacer()
-                                TextField("Mt", text: $input.value)
+                                TextField("Mt", text: $vm.target)
                                     .keyboardType(.decimalPad)
                                 
                                     .disableAutocorrection(true)
@@ -111,6 +111,7 @@ struct FinalGoal: View {
 struct FinalGoal_Previews: PreviewProvider {
     static var previews: some View {
         FinalGoal()
+            .environmentObject(MainViewModel())
     }
 }
 

@@ -10,10 +10,8 @@ import SwiftUI
 
 struct ActivitySelection: View {
     @EnvironmentObject var vm: MainViewModel
-    
-    //@State var sportSelectionArrayCopy = sportSelectionArray
     @State private var searchText = ""
-    @State var isActivitySelected: Bool = false
+    
     
     private let numberColumns = [
         GridItem(.flexible()),
@@ -45,7 +43,7 @@ struct ActivitySelection: View {
                                     Rectangle()
                                         .foregroundColor(Color("cardColor"))
                                         .cornerRadius(20)
-                                        .overlay( isActivitySelected ?
+                                        .overlay(vm.selectedSport == sportInstance.id ?
                                             RoundedRectangle(cornerRadius: 20)
                                             .stroke(sportInstance.sportColor, lineWidth: 4)
                                             :
@@ -67,7 +65,7 @@ struct ActivitySelection: View {
                                     }
                                 }
                                 .onTapGesture {
-                                    isActivitySelected.toggle()
+                                    vm.selectedSport = Int16(sportInstance.id)
                                 }
                                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
                                 .frame(width: screenWidth/3-21, height: screenWidth/3-21)
@@ -107,5 +105,8 @@ struct ActivitySelection: View {
 struct ActivitySelection_Previews: PreviewProvider {
     static var previews: some View {
         ActivitySelection()
+            .environmentObject(MainViewModel())
+        
+        
     }
 }

@@ -5,7 +5,24 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="sportID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="target" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="target" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="targetTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="trainings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainingEntity" inverseName="goal" inverseEntity="TrainingEntity"/>
+    </entity>
+    <entity name="TrainingEntity" representedClassName="TrainingEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isExcercise" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="repeatCountActual" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repeatCountTotal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="target" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalEntity" inverseName="trainings" inverseEntity="GoalEntity"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrainingResultEntity" inverseName="training" inverseEntity="TrainingResultEntity"/>
+    </entity>
+    <entity name="TrainingResultEntity" representedClassName="TrainingResultEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="result" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="training" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingEntity" inverseName="results" inverseEntity="TrainingEntity"/>
     </entity>
 </model>

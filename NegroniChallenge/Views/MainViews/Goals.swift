@@ -9,35 +9,6 @@ import SwiftUI
 
 struct Goals: View {
     @EnvironmentObject var vm: MainViewModel
-    @State var goalCardAtAll = [
-        GoalCard(
-            sportIcon: "figure.run",
-            sportColor: .green,
-            sportName: "Running",
-            targetIcon: "flag",
-            clockIcon: "stopwatch", target: 2000,
-            targetMeasure: "mt",
-            targetTime: Int(2.00),
-            targetTimeMeaseure: "mins",
-            isCompleted: false,
-            yearCompletion: 0,
-            progress: 71
-        ),
-        
-        GoalCard(
-            sportIcon: "figure.archery",
-            sportColor: .yellow,
-            sportName: "Archery",
-            targetIcon: "flag",
-            clockIcon: "stopwatch", target: 130,
-            targetMeasure: "pt",
-            targetTime: Int(0),
-            targetTimeMeaseure: "--",
-            isCompleted: false,
-            yearCompletion: 0,
-            progress: 46
-        )
-    ]
     
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -57,7 +28,7 @@ struct Goals: View {
                 ZStack{
                     Color("mainBackground")
                         .ignoresSafeArea()
-                    if(goalCardAtAll.isEmpty){
+                    if(vm.allGoals.isEmpty){
                         VStack{
                             Image(systemName: "plus.circle")
                                 .font(.system(size: 140))
@@ -69,25 +40,25 @@ struct Goals: View {
                         }
                     } else {
                         VStack{
-                            List(0 ..< 1) { goalCard in
-                                ForEach(goalCardAtAll) { goalCard in
+                            List {
+                                ForEach(vm.allGoals) { goal in
                                     Section{
                                         ZStack{
-                                            GoalCardView(goalCardInstance: goalCard)
-                                            NavigationLink( destination: DetailView( detail: goalCard)){
+                                            GoalCardView(goal: goal)
+                                            NavigationLink( destination: DetailView(detail: goal)){
                                                 EmptyView()
                                             }.opacity(0)
                                         }
                                     }
                                 }
-                                
                                 .onConfirmedDelete(
-                                    title: {indexSet in
-                                        "Delete the \(goalCardAtAll[indexSet.first!].sportName) card?"
+                                    title: { indexSet in
+                                        "Delete"
+                                     /*   "Delete the \(goalCardAtAll[indexSet.first!].sportName) card?"*/
                                     },
                                     message: "This cannot be undone.",
                                     action: { indexSet in
-                                        goalCardAtAll.remove(atOffsets: indexSet)
+                                        /*goalCardAtAll.remove(atOffsets: indexSet)*/
                                     }
                                 )
                                 
@@ -124,6 +95,7 @@ struct Goals: View {
 struct Goals_Previews: PreviewProvider {
     static var previews: some View {
         Goals()
+            .environmentObject(MainViewModel())
     }
 }
 

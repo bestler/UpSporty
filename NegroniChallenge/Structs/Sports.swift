@@ -36,7 +36,13 @@ struct SportModel: Identifiable{
     static var allSports: [SportModel] { [
         SportModel(id: 1, sportName: .running),
         SportModel(id: 2, sportName: .swimming)
-    ]
-        
+        ]
+    }
+    
+    static func getSport(for index: Int16) -> SportModel? {
+        if let index = allSports.firstIndex(where: { $0.id == index }) {
+            return allSports[index]
+        }
+        return nil
     }
 }

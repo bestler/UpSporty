@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewGoal: View {
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
     @State private var sportIndex = 0
     
@@ -50,10 +51,12 @@ struct NewGoal: View {
             .navigationBarItems(trailing:
                 Button(action: {
                     if self.selectedTab == Tab.First {
-                        self.selectedTab = Tab.Second
+                        if vm.checkSportSelection() {
+                            self.selectedTab = Tab.Second
+                        }
                     } else if self.selectedTab == Tab.Second{
-                        //Add element to Array and...
-                        self.showingSheet.toggle()
+                        vm.saveGoal()
+                        dismiss()
                     }
                 }) {
                     if self.selectedTab == Tab.Second {
@@ -66,7 +69,7 @@ struct NewGoal: View {
             .navigationBarItems(leading:
                 Button(action: {
                     if self.selectedTab == Tab.First {
-                        self.showingSheet.toggle()
+                        dismiss()
                     } else if self.selectedTab == Tab.Second{
                         self.selectedTab = Tab.First
                     }
@@ -85,5 +88,6 @@ struct NewGoal: View {
 struct NewGoal_Previews: PreviewProvider {
     static var previews: some View {
         NewGoal(showingSheet: Goals().$showingSheet)
+            .environmentObject(MainViewModel())
     }
 }
