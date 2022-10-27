@@ -7,10 +7,26 @@
 
 import SwiftUI
 
-struct CreateTrainingView: View {
+struct EditTrainingView: View {
     
-    @State private var dueDate = Date()
-    @State private var isExercise = true;
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var dueDate : Date
+    @State private var isExercise : Bool
+    
+    init(training : Training?) {
+        
+        if let traing = training{
+            self._dueDate = State(initialValue: traing.dueDate)
+            self._isExercise = State(initialValue: traing.isExercise)
+        }
+        else {
+            self._dueDate = State(initialValue: Date())
+            self._isExercise = State(initialValue: true)
+        }
+    }
+    
+    
     
     var body: some View {
         NavigationStack {
@@ -24,7 +40,7 @@ struct CreateTrainingView: View {
                     .toolbar{
                         ToolbarItem(placement: .cancellationAction){
                             Button("Cancel") {
-                                print("Test")
+                                dismiss()
                             }
                         }
                         ToolbarItem(placement: .confirmationAction){
@@ -103,8 +119,8 @@ struct CreateTrainingView: View {
     }
 }
 
-struct CreateTrainingView_Previews: PreviewProvider {
+struct EditTrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTrainingView()
+        EditTrainingView(training: nil)
     }
 }

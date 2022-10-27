@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Training : Identifiable {
     var id : UUID = UUID()
+    var dueDate : Date
+    var isCompleted : Bool = false
     var isExercise: Bool
     var repeatCountTotal : Int16
     var target : Int16
@@ -17,9 +19,10 @@ struct Training : Identifiable {
 
 struct EditTrainingSheetView: View {
     
-    var trainings = [Training(isExercise: true, repeatCountTotal: 5, target: 2000), Training(isExercise: false, repeatCountTotal: 5, target: 2000)]
+    var trainings = [Training(dueDate: Date(timeIntervalSinceReferenceDate: -123456789.0), isExercise: true,  repeatCountTotal: 5, target: 2000), Training(dueDate:Date(),isExercise: false, repeatCountTotal: 0, target: 0)]
     
-    @State private var isCreateNewTrainingSheet = false
+    @State private var isModalShown = false
+    @State private var selectedTraining : Training? = nil
     
     var body: some View {
         
@@ -49,10 +52,10 @@ struct EditTrainingSheetView: View {
                     .background(Color("cardColor"))
                     .cornerRadius(20)
                     .onTapGesture {
-                        isCreateNewTrainingSheet = true
+                        isModalShown = true
                     }
-                    .sheet(isPresented: $isCreateNewTrainingSheet){
-                        CreateTrainingView()
+                    .sheet(isPresented: $isModalShown){
+                        EditTrainingView(training: selectedTraining)
                     }
                 }.padding(.bottom, 20).padding(.horizontal, 20)
                 HStack {
@@ -64,6 +67,7 @@ struct EditTrainingSheetView: View {
                 }.padding(.horizontal, 20)
                 
                 ForEach(trainings) { training in
+                    
                     
                     HStack {
                         if(training.isExercise){
@@ -80,6 +84,10 @@ struct EditTrainingSheetView: View {
                     .background(Color("cardColor"))
                     .cornerRadius(20)
                     .padding(.horizontal, training.isExercise == true ? 20 : 0)
+                    .onTapGesture {
+                            selectedTraining = training
+                            isModalShown = true
+                    }
                 }
                 .padding(.horizontal, 20)
                 Spacer()

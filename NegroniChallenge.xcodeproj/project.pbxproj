@@ -31,7 +31,7 @@
 		4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */; };
 		4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B529071F2B0076CC93 /* UIApplication.swift */; };
 		BC9F2CE829095E4400E7B829 /* EditTrainingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */; };
-		BC9F2CEA2909D54900E7B829 /* CreateTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE92909D54900E7B829 /* CreateTrainingView.swift */; };
+		BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */; };
 		BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */; };
 		BCEDCDA0290AD389003DB353 /* TrainingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */; };
 		BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601552906A38F005800BF /* NegroniChallengeApp.swift */; };
@@ -65,7 +65,7 @@
 		4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticomponentPicker.swift; sourceTree = "<group>"; };
 		4DCFA3B529071F2B0076CC93 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingSheetView.swift; sourceTree = "<group>"; };
-		BC9F2CE92909D54900E7B829 /* CreateTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTrainingView.swift; sourceTree = "<group>"; };
+		BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingView.swift; sourceTree = "<group>"; };
 		BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTrainingView.swift; sourceTree = "<group>"; };
 		BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSheetView.swift; sourceTree = "<group>"; };
 		BCF601522906A38F005800BF /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */,
-				BC9F2CE92909D54900E7B829 /* CreateTrainingView.swift */,
+				BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */,
 				BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */,
 				BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */,
 			);
@@ -332,7 +332,7 @@
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
 				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
-				BC9F2CEA2909D54900E7B829 /* CreateTrainingView.swift in Sources */,
+				BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */,
 				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
 				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,
