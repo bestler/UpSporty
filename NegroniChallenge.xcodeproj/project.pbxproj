@@ -32,6 +32,7 @@
 		4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B529071F2B0076CC93 /* UIApplication.swift */; };
 		BC9F2CE829095E4400E7B829 /* CreateTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE729095E4400E7B829 /* CreateTrainingView.swift */; };
 		BC9F2CEA2909D54900E7B829 /* CreateExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE92909D54900E7B829 /* CreateExerciseView.swift */; };
+		BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */; };
 		BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601552906A38F005800BF /* NegroniChallengeApp.swift */; };
 		BCF601582906A38F005800BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601572906A38F005800BF /* ContentView.swift */; };
 		BCF6015A2906A38F005800BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF601592906A38F005800BF /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		4DCFA3B529071F2B0076CC93 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		BC9F2CE729095E4400E7B829 /* CreateTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTrainingView.swift; sourceTree = "<group>"; };
 		BC9F2CE92909D54900E7B829 /* CreateExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExerciseView.swift; sourceTree = "<group>"; };
+		BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTrainingView.swift; sourceTree = "<group>"; };
 		BCF601522906A38F005800BF /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF601552906A38F005800BF /* NegroniChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegroniChallengeApp.swift; sourceTree = "<group>"; };
 		BCF601572906A38F005800BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				4D42D1FA29087266003F3A46 /* GoalCardView.swift */,
 				BC9F2CE729095E4400E7B829 /* CreateTrainingView.swift */,
 				BC9F2CE92909D54900E7B829 /* CreateExerciseView.swift */,
+				BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */,
 			);
 			path = "Goals Dependent";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				4D00CDC32906A50F00142F83 /* GoalCardResults.swift in Sources */,
 				4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */,
 				4D00CDCE2906A51500142F83 /* CircularGraph.swift in Sources */,
+				BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */,
 				4D00CDD02906A51500142F83 /* Goals.swift in Sources */,
 				40A035862907EB1B0059F4E8 /* MainViewModel.swift in Sources */,
 			);
