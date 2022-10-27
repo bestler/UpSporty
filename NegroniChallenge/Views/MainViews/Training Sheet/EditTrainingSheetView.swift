@@ -15,12 +15,15 @@ struct Training : Identifiable {
 }
 
 
-struct CreateTrainingView: View {
+struct EditTrainingSheetView: View {
     
     var trainings = [Training(isExercise: true, repeatCountTotal: 5, target: 2000), Training(isExercise: false, repeatCountTotal: 5, target: 2000)]
     
+    @State private var isCreateNewTrainingSheet = false
     
     var body: some View {
+        
+        
         ZStack {
             Color("mainBackground")
                 .ignoresSafeArea()
@@ -45,8 +48,13 @@ struct CreateTrainingView: View {
                     .padding(20)
                     .background(Color("cardColor"))
                     .cornerRadius(20)
+                    .onTapGesture {
+                        isCreateNewTrainingSheet = true
+                    }
+                    .sheet(isPresented: $isCreateNewTrainingSheet){
+                        CreateTrainingView()
+                    }
                 }.padding(.bottom, 20).padding(.horizontal, 20)
-                
                 HStack {
                     Text("Already Scheduled Trainings")
                         .foregroundColor(Color("grayText"))
@@ -60,7 +68,7 @@ struct CreateTrainingView: View {
                     HStack {
                         if(training.isExercise){
                             Image(systemName: "note.text")
-                            Text("Exercise \(training.repeatCountTotal) ⅹ \(training.target) m")
+                            Text("Exercise \(training.repeatCountTotal) x \(training.target) m")
                             
                         }else {
                             Image(systemName: "flag")
@@ -77,11 +85,12 @@ struct CreateTrainingView: View {
                 Spacer()
             }
         }
+        
     }
 }
 
-struct CreateTrainingView_Previews: PreviewProvider {
+struct EditTrainingSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTrainingView()
+        EditTrainingSheetView()
     }
 }
