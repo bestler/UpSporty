@@ -16,13 +16,13 @@ struct DetailView: View {
     
     var body: some View {
         
-        NavigationStack{
-            ZStack {
-                Color("mainBackground")
-                    .ignoresSafeArea()
+        ZStack {
+            Color("mainBackground")
+                .ignoresSafeArea()
+            ScrollView {
                 VStack(spacing: 20) {
                     TabView {
-                      //  CircularGraph(progress: detail.progress, colored: detail.sportColor)
+                        //  CircularGraph(progress: detail.progress, colored: detail.sportColor)
                         Text("Second")
                         Text("Third")
                         Text("Fourth")
@@ -33,26 +33,43 @@ struct DetailView: View {
                         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
                         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                     }
-                    Spacer()
-                    Text("Sportname") //\(detail.sportName)
-                        .font(.system(size: 20))
+                    
+                    ForEach(0..<4) { item in
+                        NavigationLink {
+                            TrainingResultView()
+                        } label: {
+                            TrainingRowView()
+                                .padding(.leading, nil) //spostare il valore
+                                .padding(.trailing)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    
+                    
+                    
+                    
                     
                 }
-            }
-            .navigationBarTitle(Text("Sport title"), displayMode: .inline) //\(detail.sportName)
-            .navigationBarItems(trailing:
-                Button(action: {
                 
-                }) {
-                    Text("Edit").bold()
-                }
-            )
+            }
         }
+        
+        .navigationBarTitle(Text("Sport title"), displayMode: .inline) //\(detail.sportName)
+        .navigationBarItems(trailing:
+                Button(action: {
+            
+        }) {
+            Text("Edit").bold()
+        }
+        )
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(detail: GoalEntity())
+        NavigationStack {
+            DetailView(detail: GoalEntity())
+        }
+        
     }
 }
