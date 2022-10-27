@@ -26,60 +26,60 @@ struct NewGoal: View {
     }
     
     @State var isSearching = false
-
+    
     var body: some View {
         
         NavigationStack{
             ZStack{
                 Color("mainBackground")
                     .ignoresSafeArea()
-                    TabView(selection: $selectedTab){
-                        ActivitySelection()
-                            .tag(Tab.First)
-                            .gesture(DragGesture())
-                        FinalGoal()
-                            .tag(Tab.Second)
-                            .gesture(DragGesture())
-                    }
-                    .tabViewStyle(PageTabViewStyle())
-                    .onAppear {
-                        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
-                        UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
+                TabView(selection: $selectedTab){
+                    ActivitySelection()
+                        .tag(Tab.First)
+                        .gesture(DragGesture())
+                    FinalGoal()
+                        .tag(Tab.Second)
+                        .gesture(DragGesture())
+                }
+                .tabViewStyle(PageTabViewStyle())
+                .onAppear {
+                    UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
+                    UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                 }
             }
             .navigationBarTitle(Text("New Goal"), displayMode: .inline)
             .navigationBarItems(trailing:
-                Button(action: {
-                    if self.selectedTab == Tab.First {
-                        if vm.checkSportSelection() {
-                            self.selectedTab = Tab.Second
-                        }
-                    } else if self.selectedTab == Tab.Second{
-                        vm.saveGoal()
-                        dismiss()
+                                    Button(action: {
+                if self.selectedTab == Tab.First {
+                    if vm.checkSportSelection() {
+                        self.selectedTab = Tab.Second
                     }
-                }) {
-                    if self.selectedTab == Tab.Second {
-                        Text("Done").bold()
-                    } else {
-                        Text("Next").bold()
-                    }
+                } else if self.selectedTab == Tab.Second{
+                    vm.saveGoal()
+                    dismiss()
                 }
+            }) {
+                if self.selectedTab == Tab.Second {
+                    Text("Done").bold()
+                } else {
+                    Text("Next").bold()
+                }
+            }
             )
             .navigationBarItems(leading:
-                Button(action: {
-                    if self.selectedTab == Tab.First {
-                        dismiss()
-                    } else if self.selectedTab == Tab.Second{
-                        self.selectedTab = Tab.First
-                    }
-                }) {
-                    if self.selectedTab == Tab.First {
-                        Text("Cancel")
-                    } else {
-                        Text("Back")
-                    }
+                                    Button(action: {
+                if self.selectedTab == Tab.First {
+                    dismiss()
+                } else if self.selectedTab == Tab.Second{
+                    self.selectedTab = Tab.First
                 }
+            }) {
+                if self.selectedTab == Tab.First {
+                    Text("Cancel")
+                } else {
+                    Text("Back")
+                }
+            }
             )
         }
     }
