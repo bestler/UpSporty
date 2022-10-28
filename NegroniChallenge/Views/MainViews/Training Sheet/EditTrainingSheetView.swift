@@ -7,30 +7,19 @@
 
 import SwiftUI
 
-//struct Training : Identifiable {
-//    var id : UUID = UUID()
-//    var dueDate : Date
-//    var isCompleted : Bool = false
-//    var isExercise: Bool
-//    var repeatCountTotal : Int16
-//    var target : Int16
-//}
-
-
 struct EditTrainingSheetView: View {
     @EnvironmentObject var vm: MainViewModel
     
     
     @State private var isModalShown = false
     @State private var selectedTraining: TrainingEntity? = nil
-    
-//    var trainings = [Training(dueDate: Date(timeIntervalSinceReferenceDate: -123456789.0), isExercise: true,  repeatCountTotal: 5, target: 2000), Training(dueDate:Date(),isExercise: false, repeatCountTotal: 0, target: 0)]
+
     var body: some View {
         ZStack {
             Color("mainBackground")
                 .ignoresSafeArea()
             VStack {
-                Text("Create your Training Sheet")
+                Text("Manage your trainings")
                     .foregroundColor(Color("blackText"))
                     .font(.system(size: 26))
                     .padding(.top, 15)
@@ -45,11 +34,12 @@ struct EditTrainingSheetView: View {
                     HStack {
                         Image(systemName: "plus.circle")
                         Text("Crete new training")
+                            .bold()
                         Spacer()
                     }
-                    .padding(20)
+                    .padding(15)
                     .background(Color("cardColor"))
-                    .cornerRadius(20)
+                    .cornerRadius(10)
                     .onTapGesture {
                         isModalShown = true
                     }
@@ -57,41 +47,50 @@ struct EditTrainingSheetView: View {
                         EditTrainingView(training: selectedTraining)
                             .environmentObject(vm)
                     }
-                }.padding(.bottom, 20).padding(.horizontal, 20)
-                HStack {
-                    Text("Already Scheduled Trainings")
-                        .foregroundColor(Color("grayText"))
-                        .font(.system(size: 14))
-                    .bold()
-                    Spacer()
                 }.padding(.horizontal, 20)
                 
-                ForEach(vm.currentTrainingSheet) { training in
-                    HStack {
-                        if(training.isExcercise){
-                            Image(systemName: "note.text")
-                            Text("Exercise \(training.repeatCountTotal) x \(training.target) m")
+                List{
+                    
+                    Section(vm.currentTrainingSheet.isEmpty ? "" : "Already Scheduled Trainings"){
+                        
+                        ForEach(vm.currentTrainingSheet) { training in
                             
-                        }else {
-                            Image(systemName: "flag")
-                            Text("Assesment").bold()
-                        }
-                        Spacer()
-                    }
-                    .padding(20)
-                    .background(Color("cardColor"))
-                    .cornerRadius(20)
-                    .padding(.horizontal, training.isExcercise ? 20 : nil)
-                    .onTapGesture {
-                            selectedTraining = training
-                            isModalShown = true
+                            VStack(alignment: .leading, spacing: 3) {
+                                HStack {
+                                    if(training.isExcercise){
+                                        Image(systemName: "note.text")
+                                        Text("Exercise \(training.repeatCountTotal) x \(training.target) m")
+                                            .font(.headline)
+                                        
+                                    }else {
+                                        Image(systemName: "flag").foregroundColor(.accentColor)
+                                        Text("Assesment")
+                                            .font(.headline)
+                                            .foregroundColor(.accentColor)
+                                    }
+                                    Spacer()
+                                }
+                                .background(Color("cardColor"))
+                                Text(dateFormatted(training.dueDate ?? Date()))
+                                    .font(.subheadline)
+                                    .foregroundColor(training.isExcercise ? nil : .accentColor)
+                            }
+                            .onTapGesture {
+                                selectedTraining = training
+                                isModalShown = true
+                            }
+                        }.onDelete(perform: removeRows)
                     }
                 }
-                .padding(.horizontal, 20)
+                .scrollContentBackground(.hidden)
+                .listStyle(.insetGrouped)
                 Spacer()
             }
         }
         
+    }
+    func removeRows(at offsets: IndexSet) {
+        print("Deleted")
     }
 }
 

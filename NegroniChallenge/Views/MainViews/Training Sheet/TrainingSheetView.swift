@@ -27,8 +27,8 @@ struct TrainingSheetView: View {
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button("Save"){
-                            //TODO: Save Trainings to Database
                             vm.saveTraining(selectedGoal: goal)
+                            dismiss()
                         }
                     }
                 }

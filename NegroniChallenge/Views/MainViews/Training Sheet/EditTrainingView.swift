@@ -42,6 +42,7 @@ struct EditTrainingView: View {
                         ToolbarItem(placement: .cancellationAction){
                             Button("Cancel") {
                                 dismiss()
+                                dismiss()
                             }
                         }
                         ToolbarItem(placement: .confirmationAction){
@@ -54,6 +55,7 @@ struct EditTrainingView: View {
                                 Button("Save"){
                                     vm.saveNewTrainingStep(trainingType: .assestment, repeatCountTotal: 1, target: 0, dueDate: dueDate)
                                     //TODO: CHECK IF ALERT
+                                    dismiss()
                                     dismiss()
                                 }
                             }

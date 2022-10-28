@@ -27,6 +27,7 @@ struct DetailTrainingView: View {
                                 vm.saveNewTrainingStep(trainingType: .exercise, repeatCountTotal: repetitionCount, target: Int(distance) ?? 0, dueDate: dueDate)
                             //TODO: CHECK IF SOMETHING IS NOT GOOD
                                 dismiss()
+                                dismiss()
                             }
                         }
                     }
