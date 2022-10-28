@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct TrainingRowView: View {
+    let trainingStep: TrainingEntity
     var body: some View {
         VStack(spacing: 5) {
-            Text("Today")
+            Text(dateFormatted(trainingStep.dueDate ?? Date()))
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack{
                 VStack(alignment: .leading) {
-                    Text("Exercise")
+                    Text(trainingStep.isExcercise ? TrainingType.exercise.rawValue : TrainingType.assestment.rawValue)
                         .font(.headline)
-                    Text("Repeat")
+                    Text("Repeat \(trainingStep.repeatCountActual)/\(trainingStep.repeatCountTotal)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -39,10 +40,11 @@ struct TrainingRowView: View {
 }
 
 struct TrainingRowView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
         ZStack {
             Color.gray.ignoresSafeArea()
-            TrainingRowView()
+            TrainingRowView(trainingStep: TrainingEntity(context: manager.context))
         }
         
         

@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct DetailView: View {
-    
-    let detail: GoalEntity
+    @EnvironmentObject var vm: MainViewModel
+    let goal: GoalEntity
+    var sport: SportModel? = nil
     
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
+    
+    init(detail: GoalEntity) {
+        self.goal = detail
+        if let sport = SportModel.getSport(for: goal.sportID) {
+            self.sport = sport
+        }
+    }
     
     var body: some View {
         
@@ -34,12 +42,12 @@ struct DetailView: View {
                         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                     }
                     
-                    ForEach(0..<4) { item in
+                    ForEach(vm.currentTrainingSheet) { training in
                         NavigationLink {
                             TrainingResultView()
                         } label: {
-                            TrainingRowView()
-                                .padding(.leading, nil) //spostare il valore
+                            TrainingRowView(trainingStep: training)
+                                .padding(.leading, training.isExcercise ? 60 : nil)
                                 .padding(.trailing)
                         }
                         .buttonStyle(.plain)
@@ -53,22 +61,21 @@ struct DetailView: View {
                 
             }
         }
-        
-        .navigationBarTitle(Text("Sport title"), displayMode: .inline) //\(detail.sportName)
+        .navigationBarTitle(Text(sport?.sportName.rawValue ?? "Sport"), displayMode: .inline)
         .navigationBarItems(trailing:
-                Button(action: {
-            
-        }) {
-            Text("Edit").bold()
-        }
+                                Button("Edit", action: {
+            print("press edit from training sheet")
+        })
         )
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
         NavigationStack {
-            DetailView(detail: GoalEntity())
+            DetailView(detail: GoalEntity(context: manager.context))
+                .environmentObject(MainViewModel())
         }
         
     }

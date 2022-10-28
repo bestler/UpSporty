@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400581CE290AE36A00899683 /* DayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400581CD290AE36A00899683 /* DayString.swift */; };
+		400581D0290AE3A700899683 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400581CF290AE3A700899683 /* Formatter.swift */; };
+		400581D2290AE3BB00899683 /* Int64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400581D1290AE3BB00899683 /* Int64.swift */; };
 		400DE8A029096EC8002C1E12 /* TrainingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DE89F29096EC8002C1E12 /* TrainingRowView.swift */; };
 		400DE8A229098232002C1E12 /* TrainingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DE8A129098232002C1E12 /* TrainingResultView.swift */; };
 		400DE8A429098B4A002C1E12 /* TrainingResultRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DE8A329098B4A002C1E12 /* TrainingResultRowView.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		400581CD290AE36A00899683 /* DayString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayString.swift; sourceTree = "<group>"; };
+		400581CF290AE3A700899683 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		400581D1290AE3BB00899683 /* Int64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int64.swift; sourceTree = "<group>"; };
 		400DE89F29096EC8002C1E12 /* TrainingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingRowView.swift; sourceTree = "<group>"; };
 		400DE8A129098232002C1E12 /* TrainingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingResultView.swift; sourceTree = "<group>"; };
 		400DE8A329098B4A002C1E12 /* TrainingResultRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingResultRowView.swift; sourceTree = "<group>"; };
@@ -84,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		400581CC290AE36000899683 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				400581CD290AE36A00899683 /* DayString.swift */,
+				400581CF290AE3A700899683 /* Formatter.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		40A035812907E83F0059F4E8 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4DCFA3B529071F2B0076CC93 /* UIApplication.swift */,
+				400581D1290AE3BB00899683 /* Int64.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,6 +233,7 @@
 		BCF601542906A38F005800BF /* NegroniChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				400581CC290AE36000899683 /* Utilities */,
 				40A035842907EAAC0059F4E8 /* ViewModel */,
 				40A035812907E83F0059F4E8 /* Manager */,
 				4DCFA3B429071F160076CC93 /* Extensions */,
@@ -317,11 +334,13 @@
 				4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */,
 				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
 				4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */,
+				400581CE290AE36A00899683 /* DayString.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
 				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
 				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
+				400581D0290AE3A700899683 /* Formatter.swift in Sources */,
 				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,
 				4DCFA3952906E1460076CC93 /* LinearGraph.swift in Sources */,
 				BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */,
@@ -334,6 +353,7 @@
 				400DE8A429098B4A002C1E12 /* TrainingResultRowView.swift in Sources */,
 				4D00CDD22906A51500142F83 /* ActivitySelection.swift in Sources */,
 				4D00CDC22906A50F00142F83 /* Sports.swift in Sources */,
+				400581D2290AE3BB00899683 /* Int64.swift in Sources */,
 				4D00CDC32906A50F00142F83 /* GoalCardResults.swift in Sources */,
 				4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */,
 				4D00CDCE2906A51500142F83 /* CircularGraph.swift in Sources */,
