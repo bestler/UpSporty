@@ -59,6 +59,19 @@ struct Results: View {
                 Color("mainBackground")
                     .ignoresSafeArea()
                 ScrollView {
+                    HStack{
+                        Text("2002")
+                            .foregroundColor(Color("grayText"))
+                            .font(.system(size: 14))
+                        Spacer()
+                        Button(action: {
+                            //This should filter
+                        }) {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .font(.system(size: 18))
+                        }
+                    }
+                    .padding(.horizontal)
                     LazyVGrid(columns: numberColumns, spacing: 20){
                         ForEach(goalCardAtAll) { goalCard in
                             ZStack{
@@ -83,7 +96,7 @@ struct Results: View {
                             }
                             .frame(width: screenWidth/CGFloat(numberOfColumns)-21, height: screenWidth/CGFloat(numberOfColumns)-21)
                         }
-                    }.padding()
+                    }.padding(.horizontal)
                 }
                 
             }.navigationTitle("Results")

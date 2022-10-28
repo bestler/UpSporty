@@ -19,7 +19,7 @@ struct ProgressBarLinear: View{
     var body: some View{
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray)
+                .fill(Color("grayText"))
                 .frame(width: 300,
                        height: 10)
             RoundedRectangle(cornerRadius: 10)
