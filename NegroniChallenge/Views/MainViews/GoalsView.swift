@@ -1,5 +1,5 @@
 //
-//  Goals.swift
+//  GoalsView.swift
 //  Test 25
 //
 //  Created by 4Func on 19/10/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Goals: View {
+struct GoalsView: View {
     @EnvironmentObject var vm: MainViewModel
     
     let screenWidth  = UIScreen.main.bounds.width
@@ -82,7 +82,7 @@ struct Goals: View {
                             Image(systemName: "plus")
                         }
                         .sheet(isPresented: $showingSheet) {
-                            NewGoal(showingSheet: self.$showingSheet)
+                            NewGoalView(showingSheet: self.$showingSheet)
                                 .environmentObject(vm)
                         }
                     }
@@ -94,7 +94,7 @@ struct Goals: View {
 
 struct Goals_Previews: PreviewProvider {
     static var previews: some View {
-        Goals()
+        GoalsView()
             .environmentObject(MainViewModel())
     }
 }

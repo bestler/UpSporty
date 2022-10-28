@@ -1,5 +1,5 @@
 //
-//  ActivitySelection.swift
+//  ActivitySelectionView.swift
 //  Test 25
 //
 //  Created by Matteo Fontana on 21/10/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct ActivitySelection: View {
+struct ActivitySelectionView: View {
     @EnvironmentObject var vm: MainViewModel
     @State private var searchText = ""
     
@@ -104,7 +104,7 @@ struct ActivitySelection: View {
 
 struct ActivitySelection_Previews: PreviewProvider {
     static var previews: some View {
-        ActivitySelection()
+        ActivitySelectionView()
             .environmentObject(MainViewModel())
         
         

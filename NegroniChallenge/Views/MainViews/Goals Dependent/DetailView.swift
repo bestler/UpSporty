@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var vm: MainViewModel
+    @State private var showTrainingSheetView: Bool = false
+    
     let goal: GoalEntity
     var sport: SportModel? = nil
     
@@ -44,7 +46,8 @@ struct DetailView: View {
                     
                     ForEach(vm.currentTrainingSheet) { training in
                         NavigationLink {
-                            TrainingResultView()
+                            TrainingResultView(training: training)
+                                .environmentObject(vm)
                         } label: {
                             TrainingRowView(trainingStep: training)
                                 .padding(.leading, training.isExcercise ? 60 : nil)
@@ -64,9 +67,15 @@ struct DetailView: View {
         .navigationBarTitle(Text(sport?.sportName.rawValue ?? "Sport"), displayMode: .inline)
         .navigationBarItems(trailing:
                                 Button("Edit", action: {
-            print("press edit from training sheet")
+            showTrainingSheetView.toggle()
         })
         )
+        .fullScreenCover(isPresented: $showTrainingSheetView) {
+            TrainingSheetView(goal: goal)
+        }
+        .onAppear {
+            vm.getTrainingSheet(for: goal)
+        }
     }
 }
 

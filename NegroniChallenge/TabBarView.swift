@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TabBarView.swift
 //  NegroniChallenge
 //
 //  Created by Simon Bestler on 24.10.22.
@@ -7,26 +7,7 @@
 
 import SwiftUI
 
-class Utilities {
-
-    @AppStorage("selectedAppearance") var selectedAppearance = 0
-    var userInterfaceStyle: ColorScheme? = .dark
-
-    func overrideDisplayMode() {
-        var userInterfaceStyle: UIUserInterfaceStyle
-
-        if selectedAppearance == 2 {
-            userInterfaceStyle = .dark
-        } else if selectedAppearance == 1 {
-            userInterfaceStyle = .light
-        } else {
-            userInterfaceStyle = .unspecified
-        }
-        UIApplication.shared.currentUIWindow()?.overrideUserInterfaceStyle = userInterfaceStyle
-    }
-}
-
-struct ContentView: View {
+struct TabBarView: View {
     
     @EnvironmentObject var vm: MainViewModel
     
@@ -36,19 +17,19 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            Today()
+            TodayView()
+                .environmentObject(vm)
                 .tabItem {
                     Image(systemName: "calendar.day.timeline.leading")
                     Text("Today")
                 }
-                .environmentObject(vm)
-            Goals()
+            GoalsView()
                 .tabItem {
                     Image(systemName: "target")
                     Text("Goals")
                 }
                 .environmentObject(vm)
-            Results()
+            ResultsView()
                 .tabItem {
                     Image(systemName: "medal.fill")
                     Text("Results")
@@ -73,6 +54,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TabBarView()
     }
 }

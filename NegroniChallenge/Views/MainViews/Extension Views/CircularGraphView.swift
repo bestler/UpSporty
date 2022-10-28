@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CircularGraph: View {
+struct CircularGraphView: View {
     
     //Var for the Circular Graph
     @State var progress: CGFloat
@@ -54,6 +54,6 @@ struct CircularGraph: View {
 
 struct CircularGraph_Previews: PreviewProvider {
     static var previews: some View {
-        CircularGraph(progress: 71, progressZero: -10, colored: Color.red)
+        CircularGraphView(progress: 71, progressZero: -10, colored: Color.red)
     }
 }

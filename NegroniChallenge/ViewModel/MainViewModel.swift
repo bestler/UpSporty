@@ -35,14 +35,12 @@ class MainViewModel: ObservableObject {
     //MARK: Training sheet
     @Published var currentTrainingSheet: [TrainingEntity] = []
     @Published var newTrainingStep: [TrainingEntity] = []
-    @Published var trainingType: TrainingType = .exercise
-    @Published var trainingDueDate: Date = Date()
-    @Published var exerciseRepetition: Int = 1
-    @Published var exerciseTarget: Int = 0
+    @Published var currentResultTraining: [TrainingResultEntity] = []
     
     //MARK: Today section
     @Published var todayTrainingSheet: [TrainingEntity] = []
     @Published var todayGoals: [GoalEntity] = []
+    @Published var selectedToday: GoalEntity? = nil
     
     init() {
         getGoals()
@@ -54,7 +52,7 @@ class MainViewModel: ObservableObject {
         return true
     }
     
-    func saveGoal() {
+    func saveNewGoal() {
         addGoal()
         saveGoal()
         cleanNewGoalSetup()
@@ -87,9 +85,6 @@ class MainViewModel: ObservableObject {
         let sort = NSSortDescriptor(keyPath: \GoalEntity.dueDate, ascending: true)
         request.sortDescriptors = [sort]
         
-        //let filter = NSPredicate(format: "name == %@", "Apple")
-        //request.predicate = filter
-        
         do {
             allGoals = try manager.context.fetch(request)
         } catch let error {
@@ -100,24 +95,37 @@ class MainViewModel: ObservableObject {
     func saveTraining(selectedGoal: GoalEntity) {
         for step in newTrainingStep {
             selectedGoal.addToTrainings(step)
+                for repetition in 0..<step.repeatCountTotal {
+                    print("dentro a for")
+                    step.addToResults(createResult(number: repetition + 1))
+                }
         }
         //TODO: update current training sheet
         saveTraining(goal: selectedGoal)
-        
     }
     
-    private func saveNewTrainingStep() {
+    func saveNewTrainingStep(trainingType: TrainingType, repeatCountTotal: Int, target: Int, dueDate: Date) {
         let newTraining = TrainingEntity(context: manager.context)
         newTraining.id = UUID()
         if trainingType == .exercise {
             newTraining.isExcercise = true
-            newTraining.repeatCountTotal = Int16(exerciseRepetition)
-            newTraining.target = Int16(exerciseTarget)
+            newTraining.target = Int16(target)
         }
-        newTraining.dueDate = trainingDueDate
+        newTraining.repeatCountTotal = Int16(repeatCountTotal)
+        newTraining.dueDate = dueDate
         newTraining.repeatCountActual = 0
+        currentTrainingSheet.append(newTraining) //TODO: sorting
         newTrainingStep.append(newTraining)
     }
+    
+    private func createResult(number: Int16) -> TrainingResultEntity {
+        let newResult = TrainingResultEntity(context: manager.context)
+        newResult.id = UUID()
+        newResult.number = number
+        newResult.result = 0
+        return newResult
+    }
+    
     
     //TODO: complete
     private func cleanNewTrainingSetup() {
@@ -128,6 +136,11 @@ class MainViewModel: ObservableObject {
         let request = NSFetchRequest<TrainingEntity>(entityName: "TrainingEntity")
         let filter = NSPredicate(format: "goal == %@", goal)
         request.predicate = filter
+        
+        let sort = NSSortDescriptor(keyPath: \TrainingEntity.dueDate, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        print("get training sheet for \(goal.sportID)")
         do {
             currentTrainingSheet = try manager.context.fetch(request)
         } catch let error {
@@ -135,7 +148,23 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    private func saveGaol() {
+    func getResult(for training: TrainingEntity) {
+        let request = NSFetchRequest<TrainingResultEntity>(entityName: "TrainingResultEntity")
+        let filter = NSPredicate(format: "training == %@", training)
+        request.predicate = filter
+        
+        let sort = NSSortDescriptor(keyPath: \TrainingResultEntity.number, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        //print("get training sheet for \(goal.sportID)")
+        do {
+            currentResultTraining = try manager.context.fetch(request)
+        } catch let error {
+            print("Error fetching coredata: \(error.localizedDescription)")
+        }
+    }
+    
+    private func saveGoal() {
         allGoals.removeAll()
         todayGoals.removeAll()
         todayTrainingSheet.removeAll()

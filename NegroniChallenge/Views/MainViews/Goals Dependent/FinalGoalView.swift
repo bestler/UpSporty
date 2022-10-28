@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FinalGoal: View {
+struct FinalGoalView: View {
     @EnvironmentObject var vm: MainViewModel
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -199,7 +199,7 @@ struct FinalGoal: View {
 
 struct FinalGoal_Previews: PreviewProvider {
     static var previews: some View {
-        FinalGoal()
+        FinalGoalView()
             .environmentObject(MainViewModel())
     }
 }

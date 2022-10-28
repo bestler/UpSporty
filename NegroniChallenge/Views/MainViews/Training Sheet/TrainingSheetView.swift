@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct TrainingSheetView: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     @Environment(\.dismiss) private var dismiss
+    let goal: GoalEntity
     
     var body: some View {
         
         NavigationStack {
             EditTrainingSheetView()
+                .environmentObject(vm)
                 .navigationTitle("Training Sheet")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar{
@@ -26,6 +28,7 @@ struct TrainingSheetView: View {
                     ToolbarItem(placement: .confirmationAction){
                         Button("Save"){
                             //TODO: Save Trainings to Database
+                            vm.saveTraining(selectedGoal: goal)
                         }
                     }
                 }
@@ -35,7 +38,9 @@ struct TrainingSheetView: View {
 }
 
 struct TrainingSheetView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
-        TrainingSheetView()
+        TrainingSheetView(goal: GoalEntity(context: manager.context))
+            .environmentObject(MainViewModel())
     }
 }

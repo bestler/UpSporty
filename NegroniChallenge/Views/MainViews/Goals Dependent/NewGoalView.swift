@@ -1,5 +1,5 @@
 //
-//  NewGoal.swift
+//  NewGoalView.swift
 //  Test 25
 //
 //  Created by Matteo Fontana on 21/10/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewGoal: View {
+struct NewGoalView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
     @State private var sportIndex = 0
@@ -34,10 +34,10 @@ struct NewGoal: View {
                 Color("mainBackground")
                     .ignoresSafeArea()
                 TabView(selection: $selectedTab){
-                    ActivitySelection()
+                    ActivitySelectionView()
                         .tag(Tab.First)
                         .gesture(DragGesture())
-                    FinalGoal()
+                    FinalGoalView()
                         .tag(Tab.Second)
                         .gesture(DragGesture())
                 }
@@ -55,7 +55,7 @@ struct NewGoal: View {
                         self.selectedTab = Tab.Second
                     }
                 } else if self.selectedTab == Tab.Second{
-                    vm.saveGoal()
+                    vm.saveNewGoal()
                     dismiss()
                 }
             }) {
@@ -87,7 +87,7 @@ struct NewGoal: View {
 
 struct NewGoal_Previews: PreviewProvider {
     static var previews: some View {
-        NewGoal(showingSheet: Goals().$showingSheet)
+        NewGoalView(showingSheet: GoalsView().$showingSheet)
             .environmentObject(MainViewModel())
     }
 }

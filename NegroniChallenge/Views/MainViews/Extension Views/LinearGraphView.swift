@@ -1,5 +1,5 @@
 //
-//  LinearGraph.swift
+//  LinearGraphView.swift
 //  NegroniChallenge
 //
 //  Created by Matteo Fontana on 24/10/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LinearGraph: View {
+struct LinearGraphView: View {
     
     @State var progress: CGFloat
     @State var progressZero: CGFloat = -10
@@ -40,6 +40,6 @@ struct LinearGraph: View {
 
 struct LinearGraph_Previews: PreviewProvider {
     static var previews: some View {
-        LinearGraph(progress: 71, progressZero: -10, colored: Color.red)
+        LinearGraphView(progress: 71, progressZero: -10, colored: Color.red)
     }
 }

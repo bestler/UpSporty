@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct TrainingResultView: View {
-    @State private var count: Int = 1
-    @State private var elementArray: [Int] = [1,2,3]
+    @EnvironmentObject var vm: MainViewModel
+    let training: TrainingEntity
     var body: some View {
         VStack {
             List {
-                ForEach(Array(elementArray.enumerated()), id: \.element) { index, item in
+                ForEach(vm.currentResultTraining) { result in
                     Section {
-                        TrainingResultRowView()
+                        TrainingResultRowView(result: result)
                     } header: {
-                        Text("\(index)/5")
+                        Text("\(result.number)/\(training.repeatCountTotal)")
                     }
                     
                 }
@@ -31,15 +31,20 @@ struct TrainingResultView: View {
                 Text("Edit").bold()
             }
             )
+            .onAppear {
+                vm.getResult(for: training)
+            }
         }
         
     }
 }
 
 struct TrainingResultView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
         NavigationStack {
-            TrainingResultView()
+            TrainingResultView(training: TrainingEntity(context: manager.context))
+                .environmentObject(MainViewModel())
         }
         
     }

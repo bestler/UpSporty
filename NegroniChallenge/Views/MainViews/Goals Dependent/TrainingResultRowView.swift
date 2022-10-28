@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct TrainingResultRowView: View {
+    let result: TrainingResultEntity
+    
     var body: some View {
         HStack(spacing: 20) {
             Image(systemName: "checkmark")
                 .font(.headline)
                 .bold()
-                .foregroundColor(.green)
+                .foregroundColor(result.result != 0 ? .green : .gray)
             Text("Time: ")
                 .font(.title)
                 .foregroundColor(.secondary)
             Spacer()
-            Text("1:30:20,8")
+            Text(result.result.asTimeFormatted())
                 .font(.title)
                 .bold()
         }
@@ -27,7 +29,8 @@ struct TrainingResultRowView: View {
 }
 
 struct TrainingResultRowView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
-        TrainingResultRowView()
+        TrainingResultRowView(result: TrainingResultEntity(context: manager.context))
     }
 }

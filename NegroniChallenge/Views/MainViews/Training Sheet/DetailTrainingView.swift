@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct DetailTrainingView: View {
-    
-    @State private var distance : String = "";
-    @State private var repetitionCount : Int = 1;
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var vm: MainViewModel
+    let dueDate: Date
+    @State private var distance: String = "";
+    @State private var repetitionCount: Int = 1;
     
     var body: some View {
         NavigationStack {
@@ -22,7 +24,9 @@ struct DetailTrainingView: View {
                     .toolbar{
                         ToolbarItem(placement: .confirmationAction){
                             Button("Save"){
-                                //TODO: Add data to array
+                                vm.saveNewTrainingStep(trainingType: .exercise, repeatCountTotal: repetitionCount, target: Int(distance) ?? 0, dueDate: dueDate)
+                            //TODO: CHECK IF SOMETHING IS NOT GOOD
+                                dismiss()
                             }
                         }
                     }
@@ -111,6 +115,7 @@ struct DetailTrainingView: View {
 
 struct DetailTrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailTrainingView()
+        DetailTrainingView(dueDate: Date())
+            .environmentObject(MainViewModel())
     }
 }

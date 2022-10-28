@@ -1,5 +1,5 @@
 //
-//  HalfModalTodayView.swift
+//  ResultInputTodayView.swift
 //  NegroniChallenge
 //
 //  Created by Matteo Fontana on 24/10/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HalfModalTodayView: View {
+struct ResultInputTodayView: View {
     
     @Binding var showHalfSheet: Bool
     
@@ -90,6 +90,6 @@ struct HalfModalTodayView: View {
 
 struct HalfModalTodayView_Previews: PreviewProvider {
     static var previews: some View {
-        HalfModalTodayView(showHalfSheet: Today().$showHalfSheet)
+        ResultInputTodayView(showHalfSheet: TodayView().$showHalfSheet)
     }
 }

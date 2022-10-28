@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct EditTrainingView: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     @Environment(\.dismiss) private var dismiss
     
-    @State private var dueDate : Date
-    @State private var isExercise : Bool
+    @State private var dueDate: Date
+    @State private var isExercise: Bool
     
-    init(training : Training?) {
+    
+    init(training: TrainingEntity?) {
         
         if let traing = training{
-            self._dueDate = State(initialValue: traing.dueDate)
-            self._isExercise = State(initialValue: traing.isExercise)
+            self._dueDate = State(initialValue: traing.dueDate ?? Date())
+            self._isExercise = State(initialValue: traing.isExcercise)
         }
         else {
             self._dueDate = State(initialValue: Date())
@@ -46,11 +47,14 @@ struct EditTrainingView: View {
                         ToolbarItem(placement: .confirmationAction){
                             if(isExercise){
                                 NavigationLink("Next"){
-                                    DetailTrainingView()
+                                    DetailTrainingView(dueDate: dueDate)
+                                        .environmentObject(vm)
                                 }
                             }else{
                                 Button("Save"){
-                                    //TODO: Save to temporary array
+                                    vm.saveNewTrainingStep(trainingType: .assestment, repeatCountTotal: 1, target: 0, dueDate: dueDate)
+                                    //TODO: CHECK IF ALERT
+                                    dismiss()
                                 }
                             }
                         }
@@ -120,7 +124,9 @@ struct EditTrainingView: View {
 }
 
 struct EditTrainingView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
-        EditTrainingView(training: nil)
+        EditTrainingView(training: TrainingEntity(context: manager.context))
+            .environmentObject(MainViewModel())
     }
 }

@@ -7,26 +7,25 @@
 
 import SwiftUI
 
-struct Training : Identifiable {
-    var id : UUID = UUID()
-    var dueDate : Date
-    var isCompleted : Bool = false
-    var isExercise: Bool
-    var repeatCountTotal : Int16
-    var target : Int16
-}
+//struct Training : Identifiable {
+//    var id : UUID = UUID()
+//    var dueDate : Date
+//    var isCompleted : Bool = false
+//    var isExercise: Bool
+//    var repeatCountTotal : Int16
+//    var target : Int16
+//}
 
 
 struct EditTrainingSheetView: View {
+    @EnvironmentObject var vm: MainViewModel
     
-    var trainings = [Training(dueDate: Date(timeIntervalSinceReferenceDate: -123456789.0), isExercise: true,  repeatCountTotal: 5, target: 2000), Training(dueDate:Date(),isExercise: false, repeatCountTotal: 0, target: 0)]
     
     @State private var isModalShown = false
-    @State private var selectedTraining : Training? = nil
+    @State private var selectedTraining: TrainingEntity? = nil
     
+//    var trainings = [Training(dueDate: Date(timeIntervalSinceReferenceDate: -123456789.0), isExercise: true,  repeatCountTotal: 5, target: 2000), Training(dueDate:Date(),isExercise: false, repeatCountTotal: 0, target: 0)]
     var body: some View {
-        
-        
         ZStack {
             Color("mainBackground")
                 .ignoresSafeArea()
@@ -56,6 +55,7 @@ struct EditTrainingSheetView: View {
                     }
                     .sheet(isPresented: $isModalShown){
                         EditTrainingView(training: selectedTraining)
+                            .environmentObject(vm)
                     }
                 }.padding(.bottom, 20).padding(.horizontal, 20)
                 HStack {
@@ -66,11 +66,9 @@ struct EditTrainingSheetView: View {
                     Spacer()
                 }.padding(.horizontal, 20)
                 
-                ForEach(trainings) { training in
-                    
-                    
+                ForEach(vm.currentTrainingSheet) { training in
                     HStack {
-                        if(training.isExercise){
+                        if(training.isExcercise){
                             Image(systemName: "note.text")
                             Text("Exercise \(training.repeatCountTotal) x \(training.target) m")
                             
@@ -83,7 +81,7 @@ struct EditTrainingSheetView: View {
                     .padding(20)
                     .background(Color("cardColor"))
                     .cornerRadius(20)
-                    .padding(.horizontal, training.isExercise == true ? 20 : 0)
+                    .padding(.horizontal, training.isExcercise ? 20 : nil)
                     .onTapGesture {
                             selectedTraining = training
                             isModalShown = true
@@ -100,5 +98,6 @@ struct EditTrainingSheetView: View {
 struct EditTrainingSheetView_Previews: PreviewProvider {
     static var previews: some View {
         EditTrainingSheetView()
+            .environmentObject(MainViewModel())
     }
 }
