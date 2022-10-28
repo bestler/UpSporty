@@ -36,6 +36,10 @@
 		4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */; };
 		4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */; };
 		4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B529071F2B0076CC93 /* UIApplication.swift */; };
+		BC9F2CE829095E4400E7B829 /* EditTrainingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */; };
+		BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */; };
+		BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */; };
+		BCEDCDA0290AD389003DB353 /* TrainingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */; };
 		BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601552906A38F005800BF /* NegroniChallengeApp.swift */; };
 		BCF601582906A38F005800BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601572906A38F005800BF /* ContentView.swift */; };
 		BCF6015A2906A38F005800BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF601592906A38F005800BF /* Assets.xcassets */; };
@@ -72,6 +76,10 @@
 		4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGraphFunctions.swift; sourceTree = "<group>"; };
 		4DCFA3B2290702280076CC93 /* MulticomponentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticomponentPicker.swift; sourceTree = "<group>"; };
 		4DCFA3B529071F2B0076CC93 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingSheetView.swift; sourceTree = "<group>"; };
+		BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingView.swift; sourceTree = "<group>"; };
+		BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTrainingView.swift; sourceTree = "<group>"; };
+		BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingSheetView.swift; sourceTree = "<group>"; };
 		BCF601522906A38F005800BF /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF601552906A38F005800BF /* NegroniChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegroniChallengeApp.swift; sourceTree = "<group>"; };
 		BCF601572906A38F005800BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +170,7 @@
 		4DCFA3B7290720C30076CC93 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
+				BC0D4BDC290AE681007F8BDE /* Training Sheet */,
 				4D00CDCC2906A51500142F83 /* Today.swift */,
 				4D00CDC82906A51500142F83 /* Goals.swift */,
 				4D00CDC92906A51500142F83 /* Results.swift */,
@@ -212,6 +221,17 @@
 				4D00CDC62906A51500142F83 /* CircularGraph.swift */,
 			);
 			path = "Extension Views";
+			sourceTree = "<group>";
+		};
+		BC0D4BDC290AE681007F8BDE /* Training Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */,
+				BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */,
+				BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */,
+				BCEDCD9F290AD389003DB353 /* TrainingSheetView.swift */,
+			);
+			path = "Training Sheet";
 			sourceTree = "<group>";
 		};
 		BCF601492906A38F005800BF = {
@@ -331,13 +351,16 @@
 				4D00CDB92906A4FC00142F83 /* sportSelectionArray.swift in Sources */,
 				400DE8A029096EC8002C1E12 /* TrainingRowView.swift in Sources */,
 				4D00CDD42906A51500142F83 /* Today.swift in Sources */,
+				BC9F2CE829095E4400E7B829 /* EditTrainingSheetView.swift in Sources */,
 				4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */,
+				BCEDCDA0290AD389003DB353 /* TrainingSheetView.swift in Sources */,
 				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
 				4D00CDCF2906A51500142F83 /* Preferences.swift in Sources */,
 				400581CE290AE36A00899683 /* DayString.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoal.swift in Sources */,
 				BCF601582906A38F005800BF /* ContentView.swift in Sources */,
 				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
+				BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */,
 				4DCFA3B3290702280076CC93 /* MulticomponentPicker.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
 				400581D0290AE3A700899683 /* Formatter.swift in Sources */,
@@ -357,6 +380,7 @@
 				4D00CDC32906A50F00142F83 /* GoalCardResults.swift in Sources */,
 				4D00CDBC2906A50600142F83 /* CircularGraphFunctions.swift in Sources */,
 				4D00CDCE2906A51500142F83 /* CircularGraph.swift in Sources */,
+				BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */,
 				4D00CDD02906A51500142F83 /* Goals.swift in Sources */,
 				40A035862907EB1B0059F4E8 /* MainViewModel.swift in Sources */,
 			);
