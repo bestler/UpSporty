@@ -22,6 +22,7 @@ struct TrainingSheetView: View {
                 .toolbar{
                     ToolbarItem(placement: .cancellationAction){
                         Button("Cancel") {
+                            vm.cancelTrainingSheet(for: goal)
                             dismiss()
                         }
                     }

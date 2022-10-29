@@ -174,8 +174,9 @@ class MainViewModel: ObservableObject {
         trainingRepCount = 1
     }
     
-    private func cancelTrainingSheet(){
-        
+    func cancelTrainingSheet(for goal : GoalEntity){
+        getTrainingSheet(for: goal)
+        cleanNewTrainingSetup()
     }
     
     func getTrainingSheet(for goal: GoalEntity) {
