@@ -79,7 +79,7 @@ struct EditTrainingSheetView: View {
                                 selectedTraining = training
                                 isModalShown = true
                             }
-                        }.onDelete(perform: removeRows)
+                        }.onDelete(perform: vm.deleteTrainingFromSheet)
                     }
                 }
                 .scrollContentBackground(.hidden)

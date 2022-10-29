@@ -35,6 +35,7 @@ class MainViewModel: ObservableObject {
     //MARK: Training sheet
     @Published var currentTrainingSheet: [TrainingEntity] = []
     @Published var newTrainingStep: [TrainingEntity] = []
+    @Published var deletedTrainings: [TrainingEntity] = []
     @Published var currentResultTraining: [TrainingResultEntity] = []
     
     //MARK: Today section
@@ -93,6 +94,7 @@ class MainViewModel: ObservableObject {
     }
     
     func saveTraining(selectedGoal: GoalEntity) {
+        //New created trainings
         for step in newTrainingStep {
             selectedGoal.addToTrainings(step)
                 for repetition in 0..<step.repeatCountTotal {
@@ -100,6 +102,12 @@ class MainViewModel: ObservableObject {
                     step.addToResults(createResult(number: repetition + 1))
                 }
         }
+        // Deleted Trainigs
+        for deletedTraining in deletedTrainings {
+            selectedGoal.removeFromTrainings(deletedTraining)
+        }
+
+        
         //TODO: update current training sheet
         saveTraining(goal: selectedGoal)
     }
@@ -116,6 +124,14 @@ class MainViewModel: ObservableObject {
         newTraining.repeatCountActual = 0
         currentTrainingSheet.append(newTraining) //TODO: sorting
         newTrainingStep.append(newTraining)
+    }
+    
+    func deleteTrainingFromSheet(at offsets : IndexSet ){
+        for index in offsets {
+            let removedTraining = currentTrainingSheet.remove(at: index)
+            deletedTrainings.append(removedTraining)
+        }
+
     }
     
     private func createResult(number: Int16) -> TrainingResultEntity {
@@ -223,6 +239,7 @@ class MainViewModel: ObservableObject {
     private func saveTraining(goal: GoalEntity) {
         currentTrainingSheet.removeAll()
         newTrainingStep.removeAll()
+        deletedTrainings.removeAll()
         self.manager.save()
         self.getTrainingSheet(for: goal)
     }
