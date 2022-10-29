@@ -10,9 +10,6 @@ import SwiftUI
 struct DetailTrainingView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
-    let dueDate: Date
-    @State private var distance: String = "";
-    @State private var repetitionCount: Int = 1;
     
     var body: some View {
         NavigationStack {
@@ -24,7 +21,8 @@ struct DetailTrainingView: View {
                     .toolbar{
                         ToolbarItem(placement: .confirmationAction){
                             Button("Save"){
-                                vm.saveNewTrainingStep(trainingType: .exercise, repeatCountTotal: repetitionCount, target: Int(distance) ?? 0, dueDate: dueDate)
+                                vm.updateTrainingFromSheet()
+                                vm.saveNewTrainingStep()
                             //TODO: CHECK IF SOMETHING IS NOT GOOD
                                 dismiss()
                                 dismiss()
@@ -55,11 +53,11 @@ struct DetailTrainingView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 20)
-                                Stepper("Repetitons: \(repetitionCount) x", onIncrement: {
-                                    repetitionCount += 1
+                                Stepper("Repetitons: \(vm.trainingRepCount) x", onIncrement: {
+                                    vm.trainingRepCount += 1
                                 }, onDecrement: {
-                                    if repetitionCount > 1{
-                                        repetitionCount -= 1
+                                    if vm.trainingRepCount > 1{
+                                        vm.trainingRepCount -= 1
                                     }
 
                                 })
@@ -86,7 +84,7 @@ struct DetailTrainingView: View {
                                         .foregroundColor(Color("grayText"))
                                         .font(.system(size: 20))
                                     Spacer()
-                                    TextField("Mt", text: $distance)
+                                    TextField("Mt", text: $vm.trainingTarget)
                                         .keyboardType(.decimalPad)
                                     
                                         .disableAutocorrection(true)
@@ -116,7 +114,7 @@ struct DetailTrainingView: View {
 
 struct DetailTrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailTrainingView(dueDate: Date())
+        DetailTrainingView()
             .environmentObject(MainViewModel())
     }
 }

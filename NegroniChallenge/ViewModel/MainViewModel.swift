@@ -33,6 +33,12 @@ class MainViewModel: ObservableObject {
     @Published var allGoals: [GoalEntity] = []
     
     //MARK: Training sheet
+    @Published var selectedTraining : TrainingEntity? = nil
+    @Published var trainingDueDate: Date = Date()
+    @Published var trainingTarget : String = ""
+    @Published var trainingType : TrainingType = .exercise
+    @Published var trainingRepCount : Int = 1
+    @Published var traininingSheetUpdatedTrainings: [TrainingEntity] = []
     @Published var currentTrainingSheet: [TrainingEntity] = []
     @Published var newTrainingStep: [TrainingEntity] = []
     @Published var deletedTrainings: [TrainingEntity] = []
@@ -94,6 +100,11 @@ class MainViewModel: ObservableObject {
     }
     
     func saveTraining(selectedGoal: GoalEntity) {
+        
+        //Updated Trainings will be deleted and recreated
+        deletedTrainings.append(contentsOf: traininingSheetUpdatedTrainings)
+        newTrainingStep.append(contentsOf: traininingSheetUpdatedTrainings)
+        
         //New created trainings
         for step in newTrainingStep {
             selectedGoal.addToTrainings(step)
@@ -112,18 +123,20 @@ class MainViewModel: ObservableObject {
         saveTraining(goal: selectedGoal)
     }
     
-    func saveNewTrainingStep(trainingType: TrainingType, repeatCountTotal: Int, target: Int, dueDate: Date) {
+    func saveNewTrainingStep() {
+        
         let newTraining = TrainingEntity(context: manager.context)
         newTraining.id = UUID()
         if trainingType == .exercise {
             newTraining.isExcercise = true
-            newTraining.target = Int16(target)
+            newTraining.target = Int16(trainingTarget) ?? 0
         }
-        newTraining.repeatCountTotal = Int16(repeatCountTotal)
-        newTraining.dueDate = dueDate
+        newTraining.repeatCountTotal = Int16(trainingRepCount)
+        newTraining.dueDate = trainingDueDate
         newTraining.repeatCountActual = 0
         currentTrainingSheet.append(newTraining) //TODO: sorting
         newTrainingStep.append(newTraining)
+        cleanNewTrainingSetup()
     }
     
     func deleteTrainingFromSheet(at offsets : IndexSet ){
@@ -131,7 +144,16 @@ class MainViewModel: ObservableObject {
             let removedTraining = currentTrainingSheet.remove(at: index)
             deletedTrainings.append(removedTraining)
         }
-
+    }
+    
+    func updateTrainingFromSheet(){
+        if let training = selectedTraining {
+            traininingSheetUpdatedTrainings.append(training)
+            let index = currentTrainingSheet.firstIndex(of: training)
+            if let index = index {
+                currentTrainingSheet.remove(at: index)
+            }
+        }
     }
     
     private func createResult(number: Int16) -> TrainingResultEntity {
@@ -145,6 +167,14 @@ class MainViewModel: ObservableObject {
     
     //TODO: complete
     private func cleanNewTrainingSetup() {
+        selectedTraining = nil
+        trainingDueDate = Date()
+        trainingTarget = ""
+        trainingType = .exercise
+        trainingRepCount = 1
+    }
+    
+    private func cancelTrainingSheet(){
         
     }
     

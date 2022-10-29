@@ -44,7 +44,7 @@ struct EditTrainingSheetView: View {
                         isModalShown = true
                     }
                     .sheet(isPresented: $isModalShown){
-                        EditTrainingView(training: selectedTraining)
+                        EditTrainingView()
                             .environmentObject(vm)
                     }
                 }.padding(.horizontal, 20)
@@ -76,7 +76,9 @@ struct EditTrainingSheetView: View {
                                     .foregroundColor(training.isExcercise ? nil : .accentColor)
                             }
                             .onTapGesture {
-                                selectedTraining = training
+                                vm.selectedTraining = training
+                                vm.trainingType = training.isExcercise ? .exercise : .assestment
+                                vm.trainingDueDate = training.dueDate ?? Date()
                                 isModalShown = true
                             }
                         }.onDelete(perform: vm.deleteTrainingFromSheet)
