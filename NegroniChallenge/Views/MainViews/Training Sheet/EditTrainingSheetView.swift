@@ -79,6 +79,9 @@ struct EditTrainingSheetView: View {
                                 vm.selectedTraining = training
                                 vm.trainingType = training.isExcercise ? .exercise : .assestment
                                 vm.trainingDueDate = training.dueDate ?? Date()
+                                vm.trainingRepCount = Int(training.repeatCountTotal)
+                                vm.trainingTarget = String(training.target)
+                                print("Target " + String(vm.trainingTarget))
                                 isModalShown = true
                             }
                         }.onDelete(perform: vm.deleteTrainingFromSheet)

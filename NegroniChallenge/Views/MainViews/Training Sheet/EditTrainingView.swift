@@ -33,7 +33,7 @@ struct EditTrainingView: View {
                                 NavigationLink("Next"){
                                     DetailTrainingView()
                                         .environmentObject(vm)
-                                }
+                                }.isDetailLink(false)
                             }else{
                                 Button("Save"){
                                     vm.updateTrainingFromSheet()

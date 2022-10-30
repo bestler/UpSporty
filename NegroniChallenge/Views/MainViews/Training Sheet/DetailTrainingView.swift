@@ -11,6 +11,11 @@ struct DetailTrainingView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
     
+    @State private var repCount : Int = 0;
+    @State private var target : String = "";
+    
+
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -21,6 +26,9 @@ struct DetailTrainingView: View {
                     .toolbar{
                         ToolbarItem(placement: .confirmationAction){
                             Button("Save"){
+                                print(target)
+                                vm.trainingRepCount = repCount
+                                vm.trainingTarget = target
                                 vm.updateTrainingFromSheet()
                                 vm.saveNewTrainingStep()
                             //TODO: CHECK IF SOMETHING IS NOT GOOD
@@ -53,11 +61,11 @@ struct DetailTrainingView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 20)
-                                Stepper("Repetitons: \(vm.trainingRepCount) x", onIncrement: {
-                                    vm.trainingRepCount += 1
+                                Stepper("Repetitons: \(repCount) x", onIncrement: {
+                                    repCount += 1
                                 }, onDecrement: {
-                                    if vm.trainingRepCount > 1{
-                                        vm.trainingRepCount -= 1
+                                    if repCount > 1{
+                                        repCount -= 1
                                     }
 
                                 })
@@ -84,7 +92,7 @@ struct DetailTrainingView: View {
                                         .foregroundColor(Color("grayText"))
                                         .font(.system(size: 20))
                                     Spacer()
-                                    TextField("Mt", text: $vm.trainingTarget)
+                                    TextField("Mt", text: $target)
                                         .keyboardType(.decimalPad)
                                     
                                         .disableAutocorrection(true)
@@ -106,9 +114,13 @@ struct DetailTrainingView: View {
                     }
                     
             }
+        }.onAppear(){
+            repCount = vm.trainingRepCount
+            target = vm.trainingTarget
+            
         }
         
-        }
+    }
     }
 
 
