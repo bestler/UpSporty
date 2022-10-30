@@ -70,7 +70,6 @@ struct EditTrainingSheetView: View {
                                     }
                                     Spacer()
                                 }
-                                .background(Color("cardColor"))
                                 Text(dateFormatted(training.dueDate ?? Date()))
                                     .font(.subheadline)
                                     .foregroundColor(training.isExcercise ? nil : .accentColor)

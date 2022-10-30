@@ -16,7 +16,7 @@ struct ChartTrainingPerDayView: View {
     var body: some View {
         
         ZStack {
-            Color.white
+            Color("cardColor")
             VStack {
                 Chart {
                     ForEach(vm.chartData) { exercise in
