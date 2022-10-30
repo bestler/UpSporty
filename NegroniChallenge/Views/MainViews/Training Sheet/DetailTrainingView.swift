@@ -13,6 +13,7 @@ struct DetailTrainingView: View {
     
     @State private var repCount : Int = 0;
     @State private var target : String = "";
+    @State private var showAlert  = false;
     
 
     
@@ -27,13 +28,18 @@ struct DetailTrainingView: View {
                         ToolbarItem(placement: .confirmationAction){
                             Button("Save"){
                                 print(target)
-                                vm.trainingRepCount = repCount
-                                vm.trainingTarget = target
-                                vm.updateTrainingFromSheet()
-                                vm.saveNewTrainingStep()
-                            //TODO: CHECK IF SOMETHING IS NOT GOOD
-                                dismiss()
-                                dismiss()
+                                if(Int(target) ?? 0 <= 0){
+                                    showAlert = true
+                                    
+                                } else {
+                                    vm.trainingRepCount = repCount
+                                    vm.trainingTarget = target
+                                    vm.updateTrainingFromSheet()
+                                    vm.saveNewTrainingStep()
+                                    dismiss()
+                                    dismiss()
+                                }
+
                             }
                         }
                     }
@@ -103,9 +109,15 @@ struct DetailTrainingView: View {
                         
                             }
                             .padding(20)
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("Invalid input"),
+                                              message: Text("Distance should be greater the Zero"),
+                                              dismissButton: .default(Text("Dismiss")))
+                                    }
                             .background(Color("cardColor"))
                         .cornerRadius(20)
                         }
+                        
                         
         
                         Spacer()
