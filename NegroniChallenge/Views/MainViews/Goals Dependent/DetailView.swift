@@ -33,9 +33,11 @@ struct DetailView: View {
                 VStack(spacing: 20) {
                     TabView {
                         //  CircularGraph(progress: detail.progress, colored: detail.sportColor)
-                        Text("Second")
-                        Text("Third")
-                        Text("Fourth")
+                        
+                        Text("First")
+                        ChartTrainingPerDayView(goal: goal).environmentObject(vm)
+                        Text("More to come later ...")
+                        //Text("Fourth")
                     }
                     .frame(width: screenWidth, height: screenWidth)
                     .tabViewStyle(.page)

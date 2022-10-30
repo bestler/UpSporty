@@ -40,6 +40,8 @@
 		BCF601582906A38F005800BF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF601572906A38F005800BF /* TabBarView.swift */; };
 		BCF6015A2906A38F005800BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF601592906A38F005800BF /* Assets.xcassets */; };
 		BCF6015D2906A38F005800BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF6015C2906A38F005800BF /* Preview Assets.xcassets */; };
+		BCF829E6290DCA4B002319D1 /* ChartTrainingPerDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF829E5290DCA4B002319D1 /* ChartTrainingPerDayView.swift */; };
+		BCF829E8290DCBDA002319D1 /* TrainingsPerDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF829E7290DCBDA002319D1 /* TrainingsPerDay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		BCF601572906A38F005800BF /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		BCF601592906A38F005800BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCF6015C2906A38F005800BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BCF829E5290DCA4B002319D1 /* ChartTrainingPerDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTrainingPerDayView.swift; sourceTree = "<group>"; };
+		BCF829E7290DCBDA002319D1 /* TrainingsPerDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsPerDay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				4D00CDBF2906A50F00142F83 /* Sports.swift */,
+				BCF829E7290DCBDA002319D1 /* TrainingsPerDay.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			children = (
 				4DCFA3942906E1460076CC93 /* LinearGraphView.swift */,
 				4D00CDC62906A51500142F83 /* CircularGraphView.swift */,
+				BCF829E5290DCA4B002319D1 /* ChartTrainingPerDayView.swift */,
 			);
 			path = "Extension Views";
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 				4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */,
 				BCEDCDA0290AD389003DB353 /* TrainingSheetView.swift in Sources */,
 				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
+				BCF829E6290DCA4B002319D1 /* ChartTrainingPerDayView.swift in Sources */,
 				400581CE290AE36A00899683 /* DayString.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoalView.swift in Sources */,
 				BCF601582906A38F005800BF /* TabBarView.swift in Sources */,
@@ -338,6 +345,7 @@
 				BCF601562906A38F005800BF /* NegroniChallengeApp.swift in Sources */,
 				406B6BEC290BC865003AA0CD /* GoalCardTodayView.swift in Sources */,
 				4DCFA3932906D0280076CC93 /* ResultInputTodayView.swift in Sources */,
+				BCF829E8290DCBDA002319D1 /* TrainingsPerDay.swift in Sources */,
 				400DE8A229098232002C1E12 /* TrainingResultView.swift in Sources */,
 				4D42D1FB29087266003F3A46 /* GoalCardView.swift in Sources */,
 				4D916FBC2907D80100BE8D75 /* FinalGoalView.swift in Sources */,
@@ -479,7 +487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = STC5YZQ5V6;
+				DEVELOPMENT_TEAM = A653B885WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -508,7 +516,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = STC5YZQ5V6;
+				DEVELOPMENT_TEAM = A653B885WN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

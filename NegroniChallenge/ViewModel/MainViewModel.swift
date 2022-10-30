@@ -49,6 +49,12 @@ class MainViewModel: ObservableObject {
     @Published var todayGoals: [GoalEntity] = []
     @Published var selectedToday: GoalEntity? = nil
     
+    //MARK: Charts
+    @Published var assesmentsChartData : [TrainingsPerDay] = []
+    @Published var exercisesChartData : [TrainingsPerDay] = []
+    @Published var chartData : [TrainingsPerDay] = []
+    
+    
     init() {
         getGoals()
         getTodayGoals()
@@ -209,6 +215,63 @@ class MainViewModel: ObservableObject {
         } catch let error {
             print("Error fetching coredata: \(error.localizedDescription)")
         }
+    }
+    
+    func getTrainingsPerDay(for goal: GoalEntity){
+        //TODO: Maybe show only completed
+        let request = NSFetchRequest<TrainingEntity>(entityName: "TrainingEntity")
+        let filter = NSPredicate(format: "goal == %@", goal)
+        request.predicate = filter
+        
+        let sort = NSSortDescriptor(keyPath: \TrainingEntity.dueDate, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        var trainings: [TrainingEntity] = []
+ 
+        do {
+            trainings = try manager.context.fetch(request)
+        } catch let error {
+            print("Error fetching coredata: \(error.localizedDescription)")
+        }
+        
+        assesmentsChartData = [
+            TrainingsPerDay(day: "Monday", trainingType: .assestment),
+            TrainingsPerDay(day: "Tuesday", trainingType: .assestment),
+            TrainingsPerDay(day: "Wednesday", trainingType: .assestment),
+            TrainingsPerDay(day: "Thursday", trainingType: .assestment),
+            TrainingsPerDay(day: "Friday", trainingType: .assestment),
+            TrainingsPerDay(day: "Saturday", trainingType: .assestment),
+            TrainingsPerDay(day: "Sunday", trainingType: .assestment),
+        ]
+        
+        exercisesChartData = [
+            TrainingsPerDay(day: "Monday", trainingType: .exercise),
+            TrainingsPerDay(day: "Tuesday", trainingType: .exercise),
+            TrainingsPerDay(day: "Wednesday", trainingType: .exercise),
+            TrainingsPerDay(day: "Thursday", trainingType: .exercise),
+            TrainingsPerDay(day: "Friday", trainingType: .exercise),
+            TrainingsPerDay(day: "Saturday", trainingType: .exercise),
+            TrainingsPerDay(day: "Sunday", trainingType: .exercise),
+        ]
+        
+        for training in trainings {
+            if let date = training.dueDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEEE"
+                dateFormatter.locale = Locale(identifier: "en_US")
+                let dayOfTheWeek = dateFormatter.string(from: date)
+                if training.isExcercise {
+                    if let i = exercisesChartData.firstIndex(where: {$0.day == dayOfTheWeek}){
+                        exercisesChartData[i].count += 1
+                    }
+                }else {
+                    if let i = assesmentsChartData.firstIndex(where: {$0.day == dayOfTheWeek}){
+                        assesmentsChartData[i].count += 1
+                    }
+                }
+            }
+        }
+        chartData = assesmentsChartData + exercisesChartData
     }
     
     private func saveGoal() {
