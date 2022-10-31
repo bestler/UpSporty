@@ -22,13 +22,14 @@ struct TrainingSheetView: View {
                 .toolbar{
                     ToolbarItem(placement: .cancellationAction){
                         Button("Cancel") {
+                            vm.cancelTrainingSheet(for: goal)
                             dismiss()
                         }
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button("Save"){
-                            //TODO: Save Trainings to Database
                             vm.saveTraining(selectedGoal: goal)
+                            dismiss()
                         }
                     }
                 }

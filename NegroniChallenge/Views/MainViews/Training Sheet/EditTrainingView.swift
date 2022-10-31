@@ -11,23 +11,6 @@ struct EditTrainingView: View {
     @EnvironmentObject var vm: MainViewModel
     @Environment(\.dismiss) private var dismiss
     
-    @State private var dueDate: Date
-    @State private var isExercise: Bool
-    
-    
-    init(training: TrainingEntity?) {
-        
-        if let traing = training{
-            self._dueDate = State(initialValue: traing.dueDate ?? Date())
-            self._isExercise = State(initialValue: traing.isExcercise)
-        }
-        else {
-            self._dueDate = State(initialValue: Date())
-            self._isExercise = State(initialValue: true)
-        }
-    }
-    
-    
     
     var body: some View {
         NavigationStack {
@@ -42,18 +25,21 @@ struct EditTrainingView: View {
                         ToolbarItem(placement: .cancellationAction){
                             Button("Cancel") {
                                 dismiss()
+                                dismiss()
                             }
                         }
                         ToolbarItem(placement: .confirmationAction){
-                            if(isExercise){
+                            if(vm.trainingType == .exercise){
                                 NavigationLink("Next"){
-                                    DetailTrainingView(dueDate: dueDate)
+                                    DetailTrainingView()
                                         .environmentObject(vm)
-                                }
+                                }.isDetailLink(false)
                             }else{
                                 Button("Save"){
-                                    vm.saveNewTrainingStep(trainingType: .assestment, repeatCountTotal: 1, target: 0, dueDate: dueDate)
+                                    vm.updateTrainingFromSheet()
+                                    vm.saveNewTrainingStep()
                                     //TODO: CHECK IF ALERT
+                                    dismiss()
                                     dismiss()
                                 }
                             }
@@ -83,9 +69,9 @@ struct EditTrainingView: View {
                                 .frame(width: 20)
                             Text("Type of training")
                             Spacer()
-                            Picker(selection: $isExercise, label: Text("Select for type of training")) {
-                                Text("Exercise").tag(true)
-                                Text("Assesment").tag(false)
+                            Picker(selection: $vm.trainingType, label: Text("Select for type of training")) {
+                                Text("Exercise").tag(TrainingType.exercise)
+                                Text("Assesment").tag(TrainingType.assestment)
                             }
                             
                         }
@@ -106,7 +92,7 @@ struct EditTrainingView: View {
                                 .frame(width: 20)
                             DatePicker(
                                 "Training Date",
-                                selection: $dueDate,
+                                selection: $vm.trainingDueDate,
                                 displayedComponents: [.date]
                             )
                         }
@@ -126,7 +112,7 @@ struct EditTrainingView: View {
 struct EditTrainingView_Previews: PreviewProvider {
     static let manager = CoreDataManager.instance
     static var previews: some View {
-        EditTrainingView(training: TrainingEntity(context: manager.context))
+        EditTrainingView()
             .environmentObject(MainViewModel())
     }
 }

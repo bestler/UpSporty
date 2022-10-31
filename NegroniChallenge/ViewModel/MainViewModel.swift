@@ -34,8 +34,15 @@ class MainViewModel: ObservableObject {
     @Published var allGoals: [GoalEntity] = []
     
     //MARK: Training sheet
+    @Published var selectedTraining : TrainingEntity? = nil
+    @Published var trainingDueDate: Date = Date()
+    @Published var trainingTarget : String = ""
+    @Published var trainingType : TrainingType = .exercise
+    @Published var trainingRepCount : Int = 1
+    @Published var traininingSheetUpdatedTrainings: [TrainingEntity] = []
     @Published var currentTrainingSheet: [TrainingEntity] = []
     @Published var newTrainingStep: [TrainingEntity] = []
+    @Published var deletedTrainings: [TrainingEntity] = []
     @Published var currentResultTraining: [TrainingResultEntity] = []
     
     //MARK: Today section
@@ -53,6 +60,12 @@ class MainViewModel: ObservableObject {
     
     //MARK: Combine
     private var cancellables = Set<AnyCancellable>()
+    
+    //MARK: Charts
+    @Published var assesmentsChartData : [TrainingsPerDay] = []
+    @Published var exercisesChartData : [TrainingsPerDay] = []
+    @Published var chartData : [TrainingsPerDay] = []
+    
     
     init() {
         getGoals()
@@ -122,6 +135,12 @@ class MainViewModel: ObservableObject {
     }
     
     func saveTraining(selectedGoal: GoalEntity) {
+        
+        //Updated Trainings will be deleted and recreated
+        deletedTrainings.append(contentsOf: traininingSheetUpdatedTrainings)
+        newTrainingStep.append(contentsOf: traininingSheetUpdatedTrainings)
+        
+        //New created trainings
         for step in newTrainingStep {
             selectedGoal.addToTrainings(step)
                 for repetition in 0..<step.repeatCountTotal {
@@ -129,22 +148,47 @@ class MainViewModel: ObservableObject {
                     step.addToResults(createResult(number: repetition + 1))
                 }
         }
+        // Deleted Trainigs
+        for deletedTraining in deletedTrainings {
+            selectedGoal.removeFromTrainings(deletedTraining)
+        }
+
+        
         //TODO: update current training sheet
         saveTraining(goal: selectedGoal)
     }
     
-    func saveNewTrainingStep(trainingType: TrainingType, repeatCountTotal: Int, target: Int, dueDate: Date) {
+    func saveNewTrainingStep() {
+        
         let newTraining = TrainingEntity(context: manager.context)
         newTraining.id = UUID()
         if trainingType == .exercise {
             newTraining.isExcercise = true
-            newTraining.target = Int16(target)
+            newTraining.target = Int16(trainingTarget) ?? 0
         }
-        newTraining.repeatCountTotal = Int16(repeatCountTotal)
-        newTraining.dueDate = dueDate
+        newTraining.repeatCountTotal = Int16(trainingRepCount)
+        newTraining.dueDate = trainingDueDate
         newTraining.repeatCountActual = 0
         currentTrainingSheet.append(newTraining) //TODO: sorting
         newTrainingStep.append(newTraining)
+        cleanNewTrainingSetup()
+    }
+    
+    func deleteTrainingFromSheet(at offsets : IndexSet ){
+        for index in offsets {
+            let removedTraining = currentTrainingSheet.remove(at: index)
+            deletedTrainings.append(removedTraining)
+        }
+    }
+    
+    func updateTrainingFromSheet(){
+        if let training = selectedTraining {
+            traininingSheetUpdatedTrainings.append(training)
+            let index = currentTrainingSheet.firstIndex(of: training)
+            if let index = index {
+                currentTrainingSheet.remove(at: index)
+            }
+        }
     }
     
     private func createResult(number: Int16) -> TrainingResultEntity {
@@ -158,7 +202,16 @@ class MainViewModel: ObservableObject {
     
     //TODO: complete
     private func cleanNewTrainingSetup() {
-        
+        selectedTraining = nil
+        trainingDueDate = Date()
+        trainingTarget = ""
+        trainingType = .exercise
+        trainingRepCount = 1
+    }
+    
+    func cancelTrainingSheet(for goal : GoalEntity){
+        getTrainingSheet(for: goal)
+        cleanNewTrainingSetup()
     }
     
     func getTrainingSheet(for goal: GoalEntity) {
@@ -193,6 +246,63 @@ class MainViewModel: ObservableObject {
         }
     }
     
+
+    func getTrainingsPerDay(for goal: GoalEntity){
+        //TODO: Maybe show only completed
+        let request = NSFetchRequest<TrainingEntity>(entityName: "TrainingEntity")
+        let filter = NSPredicate(format: "goal == %@", goal)
+        request.predicate = filter
+        
+        let sort = NSSortDescriptor(keyPath: \TrainingEntity.dueDate, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        var trainings: [TrainingEntity] = []
+ 
+        do {
+            trainings = try manager.context.fetch(request)
+        } catch let error {
+            print("Error fetching coredata: \(error.localizedDescription)")
+        }
+        
+        assesmentsChartData = [
+            TrainingsPerDay(day: "Monday", trainingType: .assestment),
+            TrainingsPerDay(day: "Tuesday", trainingType: .assestment),
+            TrainingsPerDay(day: "Wednesday", trainingType: .assestment),
+            TrainingsPerDay(day: "Thursday", trainingType: .assestment),
+            TrainingsPerDay(day: "Friday", trainingType: .assestment),
+            TrainingsPerDay(day: "Saturday", trainingType: .assestment),
+            TrainingsPerDay(day: "Sunday", trainingType: .assestment),
+        ]
+        
+        exercisesChartData = [
+            TrainingsPerDay(day: "Monday", trainingType: .exercise),
+            TrainingsPerDay(day: "Tuesday", trainingType: .exercise),
+            TrainingsPerDay(day: "Wednesday", trainingType: .exercise),
+            TrainingsPerDay(day: "Thursday", trainingType: .exercise),
+            TrainingsPerDay(day: "Friday", trainingType: .exercise),
+            TrainingsPerDay(day: "Saturday", trainingType: .exercise),
+            TrainingsPerDay(day: "Sunday", trainingType: .exercise),
+        ]
+        
+        for training in trainings {
+            if let date = training.dueDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEEE"
+                dateFormatter.locale = Locale(identifier: "en_US")
+                let dayOfTheWeek = dateFormatter.string(from: date)
+                if training.isExcercise {
+                    if let i = exercisesChartData.firstIndex(where: {$0.day == dayOfTheWeek}){
+                        exercisesChartData[i].count += 1
+                    }
+                }else {
+                    if let i = assesmentsChartData.firstIndex(where: {$0.day == dayOfTheWeek}){
+                        assesmentsChartData[i].count += 1
+                    }
+                }
+            }
+        }
+        chartData = assesmentsChartData + exercisesChartData
+
     func updateResult(resultNumber: Int16, newResult: Int64, onSave: Bool) {
         let resultNumber = onSave ? resultNumber : resultNumber - 1
         if let index = selectedResultsToday.firstIndex(where: { $0.number == resultNumber }) {
@@ -217,6 +327,7 @@ class MainViewModel: ObservableObject {
         }
         saveResult()
         getTodayGoals()
+
     }
     
     private func saveGoal() {
@@ -315,6 +426,7 @@ class MainViewModel: ObservableObject {
     private func saveTraining(goal: GoalEntity) {
         currentTrainingSheet.removeAll()
         newTrainingStep.removeAll()
+        deletedTrainings.removeAll()
         self.manager.save()
         self.getTrainingSheet(for: goal)
     }

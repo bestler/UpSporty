@@ -10,9 +10,12 @@ import SwiftUI
 struct DetailTrainingView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
-    let dueDate: Date
-    @State private var distance: String = "";
-    @State private var repetitionCount: Int = 1;
+    
+    @State private var repCount : Int = 0;
+    @State private var target : String = "";
+    @State private var showAlert  = false;
+    
+
     
     var body: some View {
         NavigationStack {
@@ -24,9 +27,19 @@ struct DetailTrainingView: View {
                     .toolbar{
                         ToolbarItem(placement: .confirmationAction){
                             Button("Save"){
-                                vm.saveNewTrainingStep(trainingType: .exercise, repeatCountTotal: repetitionCount, target: Int(distance) ?? 0, dueDate: dueDate)
-                            //TODO: CHECK IF SOMETHING IS NOT GOOD
-                                dismiss()
+                                print(target)
+                                if(Int(target) ?? 0 <= 0){
+                                    showAlert = true
+                                    
+                                } else {
+                                    vm.trainingRepCount = repCount
+                                    vm.trainingTarget = target
+                                    vm.updateTrainingFromSheet()
+                                    vm.saveNewTrainingStep()
+                                    dismiss()
+                                    dismiss()
+                                }
+
                             }
                         }
                     }
@@ -54,11 +67,11 @@ struct DetailTrainingView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 20)
-                                Stepper("Repetitons: \(repetitionCount) x", onIncrement: {
-                                    repetitionCount += 1
+                                Stepper("Repetitons: \(repCount) x", onIncrement: {
+                                    repCount += 1
                                 }, onDecrement: {
-                                    if repetitionCount > 1{
-                                        repetitionCount -= 1
+                                    if repCount > 1{
+                                        repCount -= 1
                                     }
 
                                 })
@@ -85,7 +98,7 @@ struct DetailTrainingView: View {
                                         .foregroundColor(Color("grayText"))
                                         .font(.system(size: 20))
                                     Spacer()
-                                    TextField("Mt", text: $distance)
+                                    TextField("Mt", text: $target)
                                         .keyboardType(.decimalPad)
                                     
                                         .disableAutocorrection(true)
@@ -96,9 +109,15 @@ struct DetailTrainingView: View {
                         
                             }
                             .padding(20)
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("Invalid input"),
+                                              message: Text("Distance should be greater the Zero"),
+                                              dismissButton: .default(Text("Dismiss")))
+                                    }
                             .background(Color("cardColor"))
                         .cornerRadius(20)
                         }
+                        
                         
         
                         Spacer()
@@ -107,15 +126,19 @@ struct DetailTrainingView: View {
                     }
                     
             }
+        }.onAppear(){
+            repCount = vm.trainingRepCount
+            target = vm.trainingTarget
+            
         }
         
-        }
+    }
     }
 
 
 struct DetailTrainingView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailTrainingView(dueDate: Date())
+        DetailTrainingView()
             .environmentObject(MainViewModel())
     }
 }
