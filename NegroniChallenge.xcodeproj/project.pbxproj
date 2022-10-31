@@ -33,6 +33,8 @@
 		4DCFA3952906E1460076CC93 /* LinearGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3942906E1460076CC93 /* LinearGraphView.swift */; };
 		4DCFA3972906E4C30076CC93 /* LinearGraphFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */; };
 		4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFA3B529071F2B0076CC93 /* UIApplication.swift */; };
+		BC2CBF1E29105ADA00BBE209 /* AssesmentsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2CBF1D29105ADA00BBE209 /* AssesmentsChartView.swift */; };
+		BC2CBF2029106DB400BBE209 /* AssesmentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2CBF1F29106DB400BBE209 /* AssesmentResult.swift */; };
 		BC9F2CE829095E4400E7B829 /* EditTrainingSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */; };
 		BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */; };
 		BCEDCD9E290A671F003DB353 /* DetailTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */; };
@@ -72,6 +74,8 @@
 		4DCFA3942906E1460076CC93 /* LinearGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGraphView.swift; sourceTree = "<group>"; };
 		4DCFA3962906E4C30076CC93 /* LinearGraphFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGraphFunctions.swift; sourceTree = "<group>"; };
 		4DCFA3B529071F2B0076CC93 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		BC2CBF1D29105ADA00BBE209 /* AssesmentsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssesmentsChartView.swift; sourceTree = "<group>"; };
+		BC2CBF1F29106DB400BBE209 /* AssesmentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AssesmentResult.swift; path = NegroniChallenge/Structs/AssesmentResult.swift; sourceTree = SOURCE_ROOT; };
 		BC9F2CE729095E4400E7B829 /* EditTrainingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingSheetView.swift; sourceTree = "<group>"; };
 		BC9F2CE92909D54900E7B829 /* EditTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTrainingView.swift; sourceTree = "<group>"; };
 		BCEDCD9D290A671F003DB353 /* DetailTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTrainingView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		4D00CDBD2906A50F00142F83 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				BC2CBF1F29106DB400BBE209 /* AssesmentResult.swift */,
 				4D00CDBF2906A50F00142F83 /* Sports.swift */,
 				BCF829E7290DCBDA002319D1 /* TrainingsPerDay.swift */,
 			);
@@ -198,6 +203,7 @@
 		4DCFA3BC290721780076CC93 /* Extension Views */ = {
 			isa = PBXGroup;
 			children = (
+				BC2CBF1D29105ADA00BBE209 /* AssesmentsChartView.swift */,
 				4DCFA3942906E1460076CC93 /* LinearGraphView.swift */,
 				4D00CDC62906A51500142F83 /* CircularGraphView.swift */,
 				BCF829E5290DCA4B002319D1 /* ChartTrainingPerDayView.swift */,
@@ -338,10 +344,12 @@
 				4D00CDCD2906A51500142F83 /* DetailView.swift in Sources */,
 				BCF829E6290DCA4B002319D1 /* ChartTrainingPerDayView.swift in Sources */,
 				400581CE290AE36A00899683 /* DayString.swift in Sources */,
+				BC2CBF1E29105ADA00BBE209 /* AssesmentsChartView.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoalView.swift in Sources */,
 				BCF601582906A38F005800BF /* TabBarView.swift in Sources */,
 				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
 				BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */,
+				BC2CBF2029106DB400BBE209 /* AssesmentResult.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
 				400581D0290AE3A700899683 /* Formatter.swift in Sources */,
 				4DCFA3B629071F2B0076CC93 /* UIApplication.swift in Sources */,

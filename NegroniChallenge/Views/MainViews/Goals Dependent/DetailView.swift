@@ -36,6 +36,7 @@ struct DetailView: View {
                             CircularGraphView(progress: vm.calculateChallengeProgress(dueDate: dueDate, createdDate: goal.createDate ?? Date()), colored: sport?.sportColor ?? Color.blue, totalDays: dueDate.days(from: Date()), completedDays: Date().days(from: createdDate))
                         }
                         ChartTrainingPerDayView(goal: goal).environmentObject(vm)
+                        AssesmentsChartView(performanceChartData: vm.getAssesmentsResult(for: goal))
                         Text("More to come later ...")
                     }
                     .frame(width: screenWidth, height: screenWidth)
