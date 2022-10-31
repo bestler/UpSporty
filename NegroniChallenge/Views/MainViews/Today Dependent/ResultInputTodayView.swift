@@ -133,6 +133,8 @@ struct ResultInputTodayView: View {
             .navigationBarItems(
                 leading:
                     Button(action: {
+                        vm.resetContext()
+                        vm.todayResultFilter = .medium
                         dismiss()
                     }) {
                         Text("Cancel")
@@ -142,10 +144,9 @@ struct ResultInputTodayView: View {
                     Button(action: {
                         dismiss()
                         if let selectedResult = selectedResult {
-                            vm.updateResult(resultNumber: selectedResult.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), training: training, onSave: true)
+                            vm.updateResult(resultNumber: selectedResult.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), onSave: true)
                         }
-                        vm.saveResults()
-//                        vm.updateResult(result: vm.selectedResultsToday[0], newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: minutesSelection), training: training)
+                        vm.saveResults(training: training)
                         vm.todayResultFilter = .medium
                     }) {
                         Text("Save")
@@ -155,11 +156,14 @@ struct ResultInputTodayView: View {
         .onAppear {
             print("on appear for results today training \(training)")
             vm.getResultFromTodayTraining(for: training)
+            if !vm.selectedResultsToday.isEmpty {
+                selectedResult = vm.selectedResultsToday.first
+            }
         }
         .onChange(of: selectedResult) { result in
             print("result number: \(result?.number)")
             if let result = result {
-                vm.updateResult(resultNumber: result.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), training: training, onSave: false)
+                vm.updateResult(resultNumber: result.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), onSave: false)
                 hoursSelection = 0
                 minutesSelection = 0
                 secondsSelection = 0

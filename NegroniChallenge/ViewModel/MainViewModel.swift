@@ -193,11 +193,10 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func updateResult(resultNumber: Int16, newResult: Int64, training: TrainingEntity, onSave: Bool) {
+    func updateResult(resultNumber: Int16, newResult: Int64, onSave: Bool) {
         let resultNumber = onSave ? resultNumber : resultNumber - 1
         if let index = selectedResultsToday.firstIndex(where: { $0.number == resultNumber }) {
             selectedResultsToday[index].result = Int64(newResult)
-            training.repeatCountActual += 1
             print("training result: \(selectedResultsToday[index].result)")
             print("training array result: \(selectedResultsToday)")
             update.toggle()
@@ -206,7 +205,16 @@ class MainViewModel: ObservableObject {
     
     
     
-    func saveResults() {
+    func saveResults(training: TrainingEntity) {
+        print("selected \(selectedResultsToday)")
+        training.repeatCountActual = 0
+        for result in resultsToday {
+            print("result in for \(result)")
+            if result.result != 0 {
+                training.repeatCountActual += 1
+                print("numbeer count: \(training.repeatCountActual)")
+            }
+        }
         saveResult()
         getTodayGoals()
     }
@@ -313,5 +321,11 @@ class MainViewModel: ObservableObject {
     
     private func saveResult() {
         self.manager.save()
+    }
+    
+    func resetContext() {
+        self.manager.reset()
+        getTodayGoals()
+        getGoals()
     }
 }

@@ -33,4 +33,9 @@ class CoreDataManager {
         }
         
     }
+    
+    func reset() {
+        context.reset()
+        print("Reset succesfully")
+    }
 }
