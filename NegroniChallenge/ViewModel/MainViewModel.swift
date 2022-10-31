@@ -34,7 +34,7 @@ class MainViewModel: ObservableObject {
     @Published var allGoals: [GoalEntity] = []
     
     //MARK: Training sheet
-    @Published var selectedTraining : TrainingEntity? = nil
+    @Published var selectedTrainingInSheet : TrainingEntity? = nil
     @Published var trainingDueDate: Date = Date()
     @Published var trainingTarget : String = ""
     @Published var trainingType : TrainingType = .exercise
@@ -257,7 +257,7 @@ class MainViewModel: ObservableObject {
         request.sortDescriptors = [sort]
         
         var trainings: [TrainingEntity] = []
- 
+        
         do {
             trainings = try manager.context.fetch(request)
         } catch let error {
@@ -302,6 +302,7 @@ class MainViewModel: ObservableObject {
             }
         }
         chartData = assesmentsChartData + exercisesChartData
+    }
 
     func updateResult(resultNumber: Int16, newResult: Int64, onSave: Bool) {
         let resultNumber = onSave ? resultNumber : resultNumber - 1

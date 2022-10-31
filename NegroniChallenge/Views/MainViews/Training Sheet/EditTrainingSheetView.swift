@@ -12,7 +12,7 @@ struct EditTrainingSheetView: View {
     
     
     @State private var isModalShown = false
-    @State private var selectedTraining: TrainingEntity? = nil
+    @State private var selectedTrainingInSheet: TrainingEntity? = nil
 
     var body: some View {
         ZStack {
@@ -75,7 +75,7 @@ struct EditTrainingSheetView: View {
                                     .foregroundColor(training.isExcercise ? nil : .accentColor)
                             }
                             .onTapGesture {
-                                vm.selectedTraining = training
+                                vm.selectedTrainingInSheet = training
                                 vm.trainingType = training.isExcercise ? .exercise : .assestment
                                 vm.trainingDueDate = training.dueDate ?? Date()
                                 vm.trainingRepCount = Int(training.repeatCountTotal)
