@@ -110,6 +110,7 @@ class MainViewModel: ObservableObject {
         guard let target = Double(target) else { return }
         newGoal.target = target
         newGoal.targetTime = calculateMilliseconds(hour: 0, minute: 1, second: 1, millisecond: 1)
+        newGoal.createDate = Date()
     }
     //TODO: complete
     func calculateMilliseconds(hour: Int, minute: Int, second: Int, millisecond: Int) -> Int64 {
@@ -441,4 +442,14 @@ class MainViewModel: ObservableObject {
         getTodayGoals()
         getGoals()
     }
+    
+    //Progess-Bar
+    
+    func calculateChallengeProgress(dueDate: Date, createdDate: Date) -> CGFloat{
+        let totalDays = Double(dueDate.days(from: createdDate))
+        let daysLeft = Double(dueDate.days(from: Date()))
+        let percentage = 100 - ((daysLeft / totalDays) * 100)
+        return CGFloat(percentage)
+    }
+    
 }
