@@ -11,6 +11,7 @@ struct ResultInputTodayView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: MainViewModel
     @Binding var presentationDetents: PresentationDetent
+    let goal: GoalEntity
     let training: TrainingEntity
     
     @State var selectedStrenght: Int = 0
@@ -39,44 +40,60 @@ struct ResultInputTodayView: View {
                     VStack {
                         if presentationDetents == .medium {
                         if !vm.selectedResultsToday.isEmpty {
-                            Text("Repeat: \(vm.selectedResultsToday[0].number)")
-                            Text("Insert the time")
-                            HStack(spacing: 0) {
-                                Picker("", selection: $hoursSelection) {
-                                    ForEach(hours, id: \.self) { hour in
-                                        Text("\(hour)")
-                                    }
-                                }
-                                .pickerStyle(.wheel)
-                                
-                                Picker("", selection: $minutesSelection) {
-                                    ForEach(minutes, id: \.self) { minute in
-                                        Text("\(minute)")
-                                    }
-                                }
-                                .pickerStyle(.wheel)
-                                
-                                Picker("", selection: $secondsSelection) {
-                                    ForEach(seconds, id: \.self) { second in
-                                        Text("\(second)")
-                                    }
-                                }
-                                .pickerStyle(.wheel)
-                                
-                                Picker("", selection: $millisecondsSelection) {
-                                    ForEach(milliseconds, id: \.self) { millisecond in
-                                        Text("\(millisecond)")
-                                    }
-                                }
-                                .pickerStyle(.wheel)
+                            HStack {
+                                Image(systemName: "repeat")
+                                Text("Repeat number: \(vm.selectedResultsToday[0].number)/\(training.repeatCountTotal)")
+                                Spacer()
                             }
+                            .padding(15)
+                            .background(Color("cardColor"))
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                            VStack {
+                                Grid {
+                                    GridRow {
+                                        Text("h")
+                                        Text("m")
+                                        Text("s")
+                                        Text("ms")
+                                    }
+                                    .padding(.top)
+                                    
+                                    GridRow {
+                                        Picker("", selection: $hoursSelection) {
+                                            ForEach(hours, id: \.self) { hour in
+                                                Text("\(hour)")
+                                            }
+                                        }
+                                        .pickerStyle(.wheel)
+                                        
+                                        Picker("", selection: $minutesSelection) {
+                                            ForEach(minutes, id: \.self) { minute in
+                                                Text("\(minute)")
+                                            }
+                                        }
+                                        .pickerStyle(.wheel)
+                                        
+                                        Picker("", selection: $secondsSelection) {
+                                            ForEach(seconds, id: \.self) { second in
+                                                Text("\(second)")
+                                            }
+                                        }
+                                        .pickerStyle(.wheel)
+                                        
+                                        Picker("", selection: $millisecondsSelection) {
+                                            ForEach(milliseconds, id: \.self) { millisecond in
+                                                Text("\(millisecond)")
+                                            }
+                                        }
+                                        .pickerStyle(.wheel)
+                                    }
+                                }
+                            }
+                            .background(Color("cardColor"))
+                            .cornerRadius(10)
                             .padding()
-                        } else {
-                            Text("This training session is completed")
-                        }
-                        
-                        
-                        
+                        } 
                     }
                         else {
                             List {
@@ -92,35 +109,46 @@ struct ResultInputTodayView: View {
                                             
                                         }
                                     if selectedResult == result {
-                                        HStack(spacing: 0) {
-                                                Picker("", selection: $hoursSelection) {
-                                                    ForEach(hours, id: \.self) { hour in
-                                                        Text("\(hour)")
-                                                    }
+                                        VStack {
+                                            Grid {
+                                                GridRow {
+                                                    Text("h")
+                                                    Text("m")
+                                                    Text("s")
+                                                    Text("ms")
                                                 }
-                                                .pickerStyle(.wheel)
                                                 
-                                                Picker("", selection: $minutesSelection) {
-                                                    ForEach(minutes, id: \.self) { minute in
-                                                        Text("\(minute)")
+                                                GridRow {
+                                                    Picker("", selection: $hoursSelection) {
+                                                        ForEach(hours, id: \.self) { hour in
+                                                            Text("\(hour)")
+                                                        }
                                                     }
-                                                }
-                                                .pickerStyle(.wheel)
-                                                
-                                                Picker("", selection: $secondsSelection) {
-                                                    ForEach(seconds, id: \.self) { second in
-                                                        Text("\(second)")
+                                                    .pickerStyle(.wheel)
+                                                    
+                                                    Picker("", selection: $minutesSelection) {
+                                                        ForEach(minutes, id: \.self) { minute in
+                                                            Text("\(minute)")
+                                                        }
                                                     }
-                                                }
-                                                .pickerStyle(.wheel)
-                                                
-                                                Picker("", selection: $millisecondsSelection) {
-                                                    ForEach(milliseconds, id: \.self) { millisecond in
-                                                        Text("\(millisecond)")
+                                                    .pickerStyle(.wheel)
+                                                    
+                                                    Picker("", selection: $secondsSelection) {
+                                                        ForEach(seconds, id: \.self) { second in
+                                                            Text("\(second)")
+                                                        }
                                                     }
+                                                    .pickerStyle(.wheel)
+                                                    
+                                                    Picker("", selection: $millisecondsSelection) {
+                                                        ForEach(milliseconds, id: \.self) { millisecond in
+                                                            Text("\(millisecond)")
+                                                        }
+                                                    }
+                                                    .pickerStyle(.wheel)
                                                 }
-                                                .pickerStyle(.wheel)
                                             }
+                                        }
                                     }
                                 }
                             }
@@ -128,8 +156,8 @@ struct ResultInputTodayView: View {
 
                 }
             }
-            //.frame(width: screenWidth, height: screenWidth)
-            .navigationBarTitle(Text("New Goal"), displayMode: .inline)
+            .navigationTitle("Insert time")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 leading:
                     Button(action: {
@@ -146,7 +174,7 @@ struct ResultInputTodayView: View {
                         if let selectedResult = selectedResult {
                             vm.updateResult(resultNumber: selectedResult.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), onSave: true)
                         }
-                        vm.saveResults(training: training)
+                        vm.saveResults(training: training, goal: goal)
                         vm.todayResultFilter = .medium
                     }) {
                         Text("Save")
@@ -179,7 +207,7 @@ struct ResultInputTodayView: View {
 struct HalfModalTodayView_Previews: PreviewProvider {
     static let manager = CoreDataManager.instance
     static var previews: some View {
-        ResultInputTodayView(presentationDetents: .constant(.medium), training: TrainingEntity(context: manager.context))
+        ResultInputTodayView(presentationDetents: .constant(.medium), goal: GoalEntity(context: manager.context), training: TrainingEntity(context: manager.context))
             .environmentObject(MainViewModel())
     }
 }

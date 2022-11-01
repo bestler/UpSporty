@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GoalCardView: View {
-    //@EnvironmentObject var vm: MainViewModel
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
@@ -43,7 +42,7 @@ struct GoalCardView: View {
                             .font(.system(size: 28))
                             .fontWeight(.bold)
                             .foregroundColor(Color("grayText"))
-                        Text("\(goal.target)")
+                        Text("\(String(format: "%.0f", goal.target)) Mt")
                             .font(.system(size: 23))
                     }
                     HStack{
@@ -51,7 +50,7 @@ struct GoalCardView: View {
                             .font(.system(size: 28))
                             .fontWeight(.bold)
                             .foregroundColor(Color("grayText"))
-                        Text("\(goal.targetTime)")
+                        Text("\(goal.targetTime.asTimeFormatted())")
                             .font(.system(size: 23))
                     }
                 }
@@ -67,7 +66,8 @@ struct GoalCardView: View {
     }
 }
 struct GoalCardView_Previews: PreviewProvider {
+    static let manager = CoreDataManager.instance
     static var previews: some View {
-        GoalCardView(goal: GoalEntity())
+        GoalCardView(goal: GoalEntity(context: manager.context))
     }
 }

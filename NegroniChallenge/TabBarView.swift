@@ -39,8 +39,6 @@ struct TabBarView: View {
         .accentColor(Color("accentTab"))
         .onAppear(){
             let appearance = UITabBar.appearance()
-            
-            //appearance.isTranslucent = true
             appearance.unselectedItemTintColor = UIColor(Color.gray)
             appearance.backgroundColor = UIColor(Color("mainBackground"))
         }
@@ -55,5 +53,6 @@ struct TabBarView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
+            .environmentObject(MainViewModel())
     }
 }

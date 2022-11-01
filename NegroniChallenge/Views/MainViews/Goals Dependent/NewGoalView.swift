@@ -10,15 +10,9 @@ import SwiftUI
 struct NewGoalView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: MainViewModel
-    @State private var sportIndex = 0
-    
     @Binding var showingSheet: Bool
-    
-    
-    
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    
     @State private var selectedTab = Tab.First
     
     private enum Tab {

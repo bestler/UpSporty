@@ -52,13 +52,15 @@ struct GoalsView: View {
                                     }
                                 }
                                 .onConfirmedDelete(
-                                    title: { indexSet in
-                                        "Delete"
-                                     /*   "Delete the \(goalCardAtAll[indexSet.first!].sportName) card?"*/
+                                    title: { index in
+                                        if let sportName = SportModel.getSport(for: vm.allGoals[index.first!].sportID)?.sportName.rawValue {
+                                            return "Delete the \(sportName) card?"
+                                        }
+                                       return ""
                                     },
                                     message: "This cannot be undone.",
-                                    action: { indexSet in
-                                        /*goalCardAtAll.remove(atOffsets: indexSet)*/
+                                    action: { index in
+                                        vm.deleteGoal(goal: vm.allGoals[index.first!])
                                     }
                                 )
                                 

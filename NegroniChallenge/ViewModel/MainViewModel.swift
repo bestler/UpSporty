@@ -24,7 +24,7 @@ class MainViewModel: ObservableObject {
     //MARK: AddNewGoal
     @Published var selectedSport: Int16 = 0
     @Published var dueDate: Date = Date()
-    @Published var target: String = "0"
+    @Published var target: String = ""
     @Published var selectedHourPicker: Int = 0
     @Published var selectedMinutePicker: Int = 0
     @Published var selectedSecondPicker: Int = 0
@@ -109,7 +109,7 @@ class MainViewModel: ObservableObject {
         newGoal.sportID = selectedSport
         guard let target = Double(target) else { return }
         newGoal.target = target
-        newGoal.targetTime = calculateMilliseconds(hour: 0, minute: 1, second: 1, millisecond: 1)
+        newGoal.targetTime = calculateMilliseconds(hour: selectedHourPicker, minute: selectedMinutePicker, second: selectedSecondPicker, millisecond: selectedMilliSecondPicker)
     }
     //TODO: complete
     func calculateMilliseconds(hour: Int, minute: Int, second: Int, millisecond: Int) -> Int64 {
@@ -134,6 +134,11 @@ class MainViewModel: ObservableObject {
         }
     }
     
+    func deleteGoal(goal: GoalEntity) {
+        manager.context.delete(goal)
+        getGoals()
+    }
+    
     func saveTraining(selectedGoal: GoalEntity) {
         
         //Updated Trainings will be deleted and recreated
@@ -148,6 +153,7 @@ class MainViewModel: ObservableObject {
                     step.addToResults(createResult(number: repetition + 1))
                 }
         }
+        
         // Deleted Trainigs
         for deletedTraining in deletedTrainings {
             selectedGoal.removeFromTrainings(deletedTraining)
@@ -171,6 +177,8 @@ class MainViewModel: ObservableObject {
         newTraining.repeatCountActual = 0
         currentTrainingSheet.append(newTraining) //TODO: sorting
         newTrainingStep.append(newTraining)
+        let currentTrainingSheet = currentTrainingSheet.sorted(by: { $0.dueDate?.compare($1.dueDate!) == .orderedAscending })
+        self.currentTrainingSheet = currentTrainingSheet
         cleanNewTrainingSetup()
     }
     
@@ -316,7 +324,7 @@ class MainViewModel: ObservableObject {
     
     
     
-    func saveResults(training: TrainingEntity) {
+    func saveResults(training: TrainingEntity, goal: GoalEntity) {
         print("selected \(selectedResultsToday)")
         training.repeatCountActual = 0
         for result in resultsToday {
@@ -325,6 +333,13 @@ class MainViewModel: ObservableObject {
                 training.repeatCountActual += 1
                 print("numbeer count: \(training.repeatCountActual)")
             }
+        }
+        
+        if training.repeatCountActual == training.repeatCountTotal {
+            training.isCompleted = true
+        }
+        if !training.isExcercise, resultsToday[0].result <= goal.targetTime {
+            goal.isCompleted = true
         }
         saveResult()
         getTodayGoals()

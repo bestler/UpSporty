@@ -22,27 +22,7 @@ struct DetailTrainingView: View {
             ZStack{
                 Color("mainBackground")
                     .ignoresSafeArea()
-                    .navigationTitle("Exercise")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar{
-                        ToolbarItem(placement: .confirmationAction){
-                            Button("Save"){
-                                print(target)
-                                if(Int(target) ?? 0 <= 0){
-                                    showAlert = true
-                                    
-                                } else {
-                                    vm.trainingRepCount = repCount
-                                    vm.trainingTarget = target
-                                    vm.updateTrainingFromSheet()
-                                    vm.saveNewTrainingStep()
-                                    dismiss()
-                                    dismiss()
-                                }
-
-                            }
-                        }
-                    }
+                    
 
                 VStack{
                     Text("Customize your training")
@@ -56,12 +36,8 @@ struct DetailTrainingView: View {
                         .font(.system(size: 18))
                         .padding(.bottom, 20)
                         .multilineTextAlignment(.center)
-                    VStack(alignment: .leading){
-                        Text("Set the repetitons")
-                            .foregroundColor(Color("grayText"))
-                            .font(.system(size: 14))
-                            .bold()
-                        VStack{
+                    List {
+                        Section("Set the repetitons") {
                             HStack {
                                 Image(systemName: "repeat")
                                     .resizable()
@@ -70,67 +46,71 @@ struct DetailTrainingView: View {
                                 Stepper("Repetitons: \(repCount) x", onIncrement: {
                                     repCount += 1
                                 }, onDecrement: {
-                                    if repCount > 1{
+                                    if repCount > 1 {
                                         repCount -= 1
                                     }
-
                                 })
                             }
-                            
+                            .padding([.top, .bottom], 3)
                         }
-                        .padding(20)
-                        .background(Color("cardColor"))
-                        .cornerRadius(20)
-                        .padding(.bottom, 20)
-
-                        VStack(alignment: .leading) {
-                            Text("Set the distance")
-                                .foregroundColor(Color("grayText"))
-                                .font(.system(size: 14))
-                                .bold()
-                            VStack(){
-                                HStack {
-                                    Image(systemName: "figure.stand.line.dotted.figure.stand")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20)
-                                    Text("Distance")
-                                        .foregroundColor(Color("grayText"))
-                                        .font(.system(size: 20))
-                                    Spacer()
-                                    TextField("Mt", text: $target)
-                                        .keyboardType(.decimalPad)
-                                    
-                                        .disableAutocorrection(true)
-                                        .multilineTextAlignment(.trailing)
-                                        .foregroundColor(Color("blackText"))
-                                        .font(.system(size: 20))
-                                }
                         
+                        Section("Set the distance") {
+                            HStack {
+                                Image(systemName: "figure.stand.line.dotted.figure.stand")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20)
+                                Text("Distance")
+                                    .foregroundColor(Color("grayText"))
+                                    .font(.system(size: 20))
+                                Spacer()
+                                TextField("Mt", text: $target)
+                                    .keyboardType(.decimalPad)
+                                    .disableAutocorrection(true)
+                                    .multilineTextAlignment(.trailing)
+                                    .foregroundColor(Color("blackText"))
+                                    .font(.system(size: 20))
                             }
-                            .padding(20)
-                            .alert(isPresented: $showAlert) {
-                                Alert(title: Text("Invalid input"),
-                                              message: Text("Distance should be greater the Zero"),
-                                              dismissButton: .default(Text("Dismiss")))
-                                    }
-                            .background(Color("cardColor"))
-                        .cornerRadius(20)
+                            .padding([.top, .bottom], 6)
                         }
-                        
-                        
-        
-                        Spacer()
-                    }.padding(.horizontal, 20)
-                        
                     }
+                    .scrollDisabled(true)
+                    .scrollContentBackground(.hidden)
+                }
                     
             }
-        }.onAppear(){
+            .navigationTitle("Exercise")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .confirmationAction){
+                    Button("Save"){
+                        print(target)
+                        if(Int(target) ?? 0 <= 0){
+                            showAlert.toggle()
+                            
+                        } else {
+                            vm.trainingRepCount = repCount
+                            vm.trainingTarget = target
+                            vm.updateTrainingFromSheet()
+                            vm.saveNewTrainingStep()
+                            dismiss()
+                            dismiss()
+                        }
+
+                    }
+                }
+            }
+        }
+        .onAppear(){
             repCount = vm.trainingRepCount
             target = vm.trainingTarget
             
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Invalid input"),
+                          message: Text("Distance should be greater the Zero"),
+                          dismissButton: .default(Text("Dismiss")))
+                }
         
     }
     }
@@ -142,3 +122,4 @@ struct DetailTrainingView_Previews: PreviewProvider {
             .environmentObject(MainViewModel())
     }
 }
+

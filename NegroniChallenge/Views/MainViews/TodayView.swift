@@ -12,7 +12,6 @@ struct TodayView: View {
     @State private var showingSheet = false
     @State private var midY: CGFloat = 0.0
     @State var showHalfSheet: Bool = false
-    
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
@@ -49,11 +48,12 @@ struct TodayView: View {
                                                 vm.selectedToday = goal
                                             } label: {
                                                 Text(SportModel.getSport(for: goal.sportID)?.sportName.rawValue ?? "")
-                                                    .foregroundColor(.white)
-                                                    .padding()
-                                                    .background(vm.selectedToday == goal ? .blue : .blue.opacity(0.5))
+                                                    .foregroundColor(vm.selectedToday == goal ? .white : .secondary)
+                                                    .padding(10)
+                                                    .background(vm.selectedToday == goal ? Color.gray : Color.gray.opacity(0.3))
                                                     .cornerRadius(10)
                                             }
+                                            
                                         }
                                     }
                                 }
@@ -62,12 +62,8 @@ struct TodayView: View {
                             List {
                                     Section {
                                         if let goal = vm.goalToShow {
-                                            Text(SportModel.getSport(for: goal.sportID)?.sportName.rawValue ?? "")
+                                            GoalCardTodayView(goal: goal)
                                         }
-                                        
-                                            //                                            GoalCardTodayView()
-                                            //                                                .environmentObject(vm)
-                                        
                                     }
                                     Section{
                                         ForEach(vm.todayTrainingSheet) { training in
@@ -76,22 +72,22 @@ struct TodayView: View {
                                                 showHalfSheet.toggle()
                                             } label: {
                                                 HStack{
-                                                    Image(systemName: "plus.circle")
-                                                        .foregroundColor(Color("blackText"))
+                                                    Image(systemName: training.isCompleted ? "checkmark.circle" : "plus.circle")
                                                         .font(.system(size: 40))
+                                                        .foregroundColor(training.isCompleted ? .green : .primary)
                                                     VStack(alignment: .leading){
-                                                        Text(training.isExcercise ? TrainingType.exercise.rawValue : TrainingType.assestment.rawValue)
-                                                            .foregroundColor(Color("blackText"))
-                                                            .font(.system(size: 20))
-                                                            .bold()
-                                                        Text("Repeat")
+                                                            Text(training.isExcercise ? "\(TrainingType.exercise.rawValue) \(training.repeatCountTotal) x \(training.target) Mt" : "\(TrainingType.assestment.rawValue)")
+                                                                .foregroundColor(Color("blackText"))
+                                                                .font(.system(size: 20))
+                                                                .bold()
+                                                        
+                                                        Text("Repetition")
                                                             .foregroundColor(Color("grayText"))
                                                             .font(.system(size: 16))
                                                         Text("\(training.repeatCountActual)/\(training.repeatCountTotal)")
                                                             .foregroundColor(Color("grayText"))
                                                             .font(.system(size: 16))
                                                     }
-                                                    
                                                 }
                                             }
                                         }
@@ -103,12 +99,8 @@ struct TodayView: View {
                             .scrollContentBackground(.hidden)
                             .listStyle(InsetGroupedListStyle())
                         }
-                        
                     }
-                    
-                    
                 }
-                
             }
             .navigationTitle("Today")
             .onAppear(perform: {
@@ -117,8 +109,27 @@ struct TodayView: View {
             })
             .sheet(isPresented: $showHalfSheet) {
                 if let selectedTraining = vm.selectedTraining {
-                    ResultInputTodayView(presentationDetents: $vm.todayResultFilter, training: selectedTraining)
-                        .presentationDetents(([.large, .medium]), selection: $vm.todayResultFilter)
+                    if selectedTraining.isCompleted {
+                            VStack(spacing: 40) {
+                                Text("This training session is completed")
+                                    .font(.largeTitle)
+                                    .multilineTextAlignment(.center)
+                                Image(systemName: "checkmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 100, height: 100)
+                            }
+                            .presentationDetents([.medium])
+                            .presentationDragIndicator(.visible)
+                    } else {
+                        if let goal = vm.goalToShow {
+                            ResultInputTodayView(presentationDetents: $vm.todayResultFilter, goal: goal, training: selectedTraining)
+                                .presentationDetents([.large, .medium], selection: $vm.todayResultFilter)
+                        }
+                        
+                    }
+                    
                 } else {
                     Text("nil")
                 }
