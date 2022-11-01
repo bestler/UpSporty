@@ -14,11 +14,14 @@ struct CircularGraphView: View {
     @State var progressZero: CGFloat = -10
     @State var colored: Color
     @State private var numberGraph: Double = 0
+    let totalDays: Int
+    let completedDays: Int
+
     
     var body: some View {
         VStack {
             
-            Text("Days")
+            Text("Progress of challenge")
             
             //ZStack Circular Graph
             ZStack{
@@ -29,12 +32,14 @@ struct CircularGraphView: View {
                             .modifier(AnimatableNumberModifier(number: numberGraph))
                             .font(.system(size: 60))
                             .fontWeight(.bold)
-                        Text("%")
+                            
+                        
+                        Text("/ \(totalDays) days")
                             .font(.system(size: 24) .weight(.bold))
                             .baselineOffset(60 - 36)
-                            .padding(.leading, -10)
+                            .padding(.leading, totalDays > 9 ? -10 : -20)
                     }
-                    Text("of your goal path")
+                    Text("of challenge passed")
                         .font(.system(size: 18) .weight(.bold))
                 }
                 ProgressBar(progress: numberGraph, color: colored)
@@ -52,8 +57,9 @@ struct CircularGraphView: View {
     }
 }
 
+
 struct CircularGraph_Previews: PreviewProvider {
     static var previews: some View {
-        CircularGraphView(progress: 71, progressZero: -10, colored: Color.red)
+        CircularGraphView(progress: 71, progressZero: -10, colored: Color.red, totalDays: 90, completedDays: 9)
     }
 }

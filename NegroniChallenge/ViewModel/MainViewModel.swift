@@ -456,4 +456,51 @@ class MainViewModel: ObservableObject {
         getTodayGoals()
         getGoals()
     }
+    
+    //Progess-Bar
+    
+    func calculateChallengeProgress(dueDate: Date, createdDate: Date) -> CGFloat{
+        let totalDays = Double(dueDate.days(from: createdDate))
+        let daysLeft = Double(dueDate.days(from: Date()))
+        let percentage = 100 - ((daysLeft / totalDays) * 100)
+        return CGFloat(percentage)
+    }
+    
+    func getAssesmentsResult(for goal: GoalEntity) -> [AssesmentResult]{
+        let request = NSFetchRequest<TrainingEntity>(entityName: "TrainingEntity")
+        let filter = NSPredicate(format: "goal == %@", goal)
+        request.predicate = filter
+        
+        let sort = NSSortDescriptor(keyPath: \TrainingEntity.dueDate, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        var allTrainings : [TrainingEntity] = []
+       
+        do {
+            allTrainings = try manager.context.fetch(request)
+        } catch let error {
+            print("Error fetching coredata: \(error.localizedDescription)")
+        }
+        
+        var performanceChartData : [AssesmentResult] = []
+        
+        print(allTrainings.count)
+        
+        for training in allTrainings {
+            if training.isExcercise == false {
+                guard let results = training.results?.allObjects as? [TrainingResultEntity] else {
+                    return []
+                }
+                if let dueDate = training.dueDate {
+                    performanceChartData.append(AssesmentResult(date: dueDate, result: results[0].result, goal: goal.targetTime))
+                }
+                
+            }
+        }
+        
+        print(performanceChartData)
+        
+        return performanceChartData
+    }
+    
 }
