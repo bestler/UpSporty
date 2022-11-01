@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LinearGraphView: View {
     
+    let daysLeft: Int
+    
     @State var progress: CGFloat
     @State var progressZero: CGFloat = -10
     @State var colored: Color
@@ -17,14 +19,14 @@ struct LinearGraphView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Goal path percentage:")
+                Text("Days left: ")
                     .foregroundColor(Color("grayText"))
                 Text(" ")
                     .frame(width: 35, height: 20)
-                    .modifier(AnimatableNumberModifier(number: numberGraph))
+                    .modifier(AnimatableNumberModifier(number: Double(daysLeft)))
                     .bold()
                     .foregroundColor(Color("grayText"))
-                Text("%")
+                Text("")
                     .foregroundColor(Color("grayText"))
             }
             ProgressBarLinear(progress: numberGraph, color: colored)
@@ -40,6 +42,6 @@ struct LinearGraphView: View {
 
 struct LinearGraph_Previews: PreviewProvider {
     static var previews: some View {
-        LinearGraphView(progress: 71, progressZero: -10, colored: Color.red)
+        LinearGraphView(daysLeft: 10, progress: 71, progressZero: -10, colored: Color.red)
     }
 }

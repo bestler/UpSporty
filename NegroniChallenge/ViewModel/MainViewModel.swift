@@ -109,6 +109,7 @@ class MainViewModel: ObservableObject {
         newGoal.sportID = selectedSport
         guard let target = Double(target) else { return }
         newGoal.target = target
+        newGoal.createDate = Date()
         newGoal.targetTime = calculateMilliseconds(hour: selectedHourPicker, minute: selectedMinutePicker, second: selectedSecondPicker, millisecond: selectedMilliSecondPicker)
     }
     //TODO: complete
@@ -460,8 +461,9 @@ class MainViewModel: ObservableObject {
     //Progess-Bar
     
     func calculateChallengeProgress(dueDate: Date, createdDate: Date) -> CGFloat{
-        let totalDays = Double(dueDate.days(from: createdDate))
-        let daysLeft = Double(dueDate.days(from: Date()))
+        let totalDays = Double(Calendar.current.numberOfDaysBetween(dueDate, and: createdDate))
+
+        let daysLeft = Double(Calendar.current.numberOfDaysBetween(dueDate, and: Date()))
         let percentage = 100 - ((daysLeft / totalDays) * 100)
         return CGFloat(percentage)
     }
@@ -492,7 +494,10 @@ class MainViewModel: ObservableObject {
                     return []
                 }
                 if let dueDate = training.dueDate {
-                    performanceChartData.append(AssesmentResult(date: dueDate, result: results[0].result, goal: goal.targetTime))
+                    if results[0].result != 0 {
+                        performanceChartData.append(AssesmentResult(date: dueDate, result: results[0].result, goal: goal.targetTime))
+                        print(results[0].result.asTimeFormatted())
+                    }
                 }
                 
             }

@@ -11,17 +11,19 @@ struct GoalCardTodayView: View {
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    let progress: CGFloat
     @State var progressZero: CGFloat = -10
     @State private var numberGraph: Double = 0
     
     let goal: GoalEntity
     var sport: SportModel? = nil
     
-    init(goal: GoalEntity) {
+    init(goal: GoalEntity, progress : CGFloat) {
         self.goal = goal
         if let sport = SportModel.getSport(for: goal.sportID) {
             self.sport = sport
         }
+        self.progress = progress
     }
     
     var body: some View {
@@ -60,16 +62,16 @@ struct GoalCardTodayView: View {
                 Spacer()
             }
             VStack {
-//                LinearGraphView(progress: 30, colored: sport.sportColor) //goalCardInstance.progress
-//                    .onAppear() {
-//                        withAnimation(.spring(response: 0.8, dampingFraction: 0.9, blendDuration:100)) {
-//                            //  progressZero = goalCardInstance.progress
-//                            //  numberGraph = goalCardInstance.progress + 0
-//                        }
-//                    }
-//                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                LinearGraphView(daysLeft : (Calendar.current.numberOfDaysBetween(Date(), and: goal.dueDate!)), progress: progress, colored: sport.sportColor)
+                    .onAppear() {
+                        withAnimation(.spring(response: 0.8, dampingFraction: 0.9, blendDuration:100)) {
+                              progressZero = progress
+                              numberGraph = progress + 0
+                        }
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 
-                Text("Days left: \(Calendar.current.numberOfDaysBetween(goal.dueDate!, and: Date()))")
+                //Text("Days left: \(Calendar.current.numberOfDaysBetween(Date(), and: goal.dueDate!))")
             }
         }
     }
@@ -79,6 +81,6 @@ struct GoalCardTodayView: View {
 struct GoalCardTodayView_Previews: PreviewProvider {
     static let manager = CoreDataManager.instance
     static var previews: some View {
-        GoalCardTodayView(goal: GoalEntity(context: manager.context))
+        GoalCardTodayView(goal: GoalEntity(context: manager.context), progress: 85)
     }
 }
