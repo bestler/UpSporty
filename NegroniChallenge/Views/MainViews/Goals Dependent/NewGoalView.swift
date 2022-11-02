@@ -36,8 +36,9 @@ struct NewGoalView: View {
                         .tag(Tab.Second)
                         .gesture(DragGesture())
                 }
-                .tabViewStyle(PageTabViewStyle())
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                .indexViewStyle(PageIndexViewStyle())
             }
             .navigationBarTitle(Text("New Goal"), displayMode: .inline)
             .navigationBarItems(trailing:
