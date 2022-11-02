@@ -66,30 +66,34 @@ struct TodayView: View {
                                         }
                                     }
                                     Section{
-                                        ForEach(vm.todayTrainingSheet) { training in
-                                            Button {
-                                                vm.selectedTraining = training
-                                                showHalfSheet.toggle()
-                                            } label: {
-                                                HStack{
-                                                    Image(systemName: training.isCompleted ? "checkmark.circle" : "plus.circle")
-                                                        .font(.system(size: 40))
-                                                        .foregroundColor(training.isCompleted ? .green : .primary)
-                                                    VStack(alignment: .leading){
-                                                            Text(training.isExcercise ? "\(TrainingType.exercise.rawValue) \(training.repeatCountTotal) x \(training.target) Mt" : "\(TrainingType.assestment.rawValue)")
-                                                                .foregroundColor(Color("blackText"))
-                                                                .font(.system(size: 20))
-                                                                .bold()
-                                                        
-                                                        Text("Repetition")
-                                                            .foregroundColor(Color("grayText"))
-                                                            .font(.system(size: 16))
-                                                        Text("\(training.repeatCountActual)/\(training.repeatCountTotal)")
-                                                            .foregroundColor(Color("grayText"))
-                                                            .font(.system(size: 16))
+                                        if !vm.todayTrainingSheet.isEmpty {
+                                            ForEach(vm.todayTrainingSheet) { training in
+                                                Button {
+                                                    vm.selectedTraining = training
+                                                    showHalfSheet.toggle()
+                                                } label: {
+                                                    HStack{
+                                                        Image(systemName: training.isCompleted ? "checkmark.circle" : "plus.circle")
+                                                            .font(.system(size: 40))
+                                                            .foregroundColor(training.isCompleted ? .green : .primary)
+                                                        VStack(alignment: .leading){
+                                                                Text(training.isExcercise ? "\(TrainingType.exercise.rawValue) \(training.repeatCountTotal) x \(training.target) Mt" : "\(TrainingType.assestment.rawValue)")
+                                                                    .foregroundColor(Color("blackText"))
+                                                                    .font(.system(size: 20))
+                                                                    .bold()
+                                                            
+                                                            Text("Repetition")
+                                                                .foregroundColor(Color("grayText"))
+                                                                .font(.system(size: 16))
+                                                            Text("\(training.repeatCountActual)/\(training.repeatCountTotal)")
+                                                                .foregroundColor(Color("grayText"))
+                                                                .font(.system(size: 16))
+                                                        }
                                                     }
                                                 }
                                             }
+                                        } else {
+                                            Text("No training for today")
                                         }
                                         
                                     }

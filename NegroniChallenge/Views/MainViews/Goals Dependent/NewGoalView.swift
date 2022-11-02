@@ -20,6 +20,7 @@ struct NewGoalView: View {
     }
     
     @State var isSearching = false
+    @FocusState var distanceInFocus: Bool
     
     var body: some View {
         
@@ -31,15 +32,12 @@ struct NewGoalView: View {
                     ActivitySelectionView()
                         .tag(Tab.First)
                         .gesture(DragGesture())
-                    FinalGoalView()
+                    FinalGoalView(distanceInFocus: _distanceInFocus)
                         .tag(Tab.Second)
                         .gesture(DragGesture())
                 }
                 .tabViewStyle(PageTabViewStyle())
-                .onAppear {
-                    UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("blackText"))
-                    UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
-                }
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
             }
             .navigationBarTitle(Text("New Goal"), displayMode: .inline)
             .navigationBarItems(trailing:
@@ -75,6 +73,17 @@ struct NewGoalView: View {
                 }
             }
             )
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button {
+                        distanceInFocus = false
+                    } label: {
+                        Text("Done")
+                    }
+
+                }
+            }
         }
     }
 }

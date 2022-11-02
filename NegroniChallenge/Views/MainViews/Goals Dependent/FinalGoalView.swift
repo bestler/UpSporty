@@ -27,7 +27,7 @@ struct FinalGoalView: View {
     
     @State var showPicker: Bool = false
     @State var addFrameToggle: Bool = false
-    
+    @FocusState var distanceInFocus: Bool
     private let hours = [Int](0..<24)
     private let minutes = [Int](0..<60)
     private let seconds = [Int](0..<60)
@@ -73,13 +73,15 @@ struct FinalGoalView: View {
                                     .keyboardType(.decimalPad)
                                     .disableAutocorrection(true)
                                     .multilineTextAlignment(.trailing)
+                                    .focused($distanceInFocus)
                                     .foregroundColor(Color("blackText"))
-                                    .font(.headline)
+                                    
                             }
                             .padding([.top, .bottom], 3)
                             
                             Button {
                                 showPicker.toggle()
+                                distanceInFocus = false
                             } label: {
                                 HStack {
                                     Image(systemName: "stopwatch")
@@ -138,6 +140,7 @@ struct FinalGoalView: View {
                     }
                     .scrollDisabled(true)
                     .scrollContentBackground(.hidden)
+                    
                 }
             }
         }

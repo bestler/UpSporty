@@ -373,8 +373,8 @@ class MainViewModel: ObservableObject {
         
         let dateFrom = Calendar.current.startOfDay(for: Date())
         if let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom) {
-            let fromFilter = NSPredicate(format: "ANY trainings.dueDate >= %@", dateFrom as CVarArg)
-            let toFilter = NSPredicate(format: "ANY trainings.dueDate < %@", dateTo as CVarArg)
+            let fromFilter = NSPredicate(format: "trainings.dueDate >= %@", dateFrom as CVarArg) //ANY
+            let toFilter = NSPredicate(format: "trainings.dueDate < %@", dateTo as CVarArg)
             let filter = NSCompoundPredicate(andPredicateWithSubpredicates: [fromFilter, toFilter])
             request.predicate = filter
             
@@ -383,12 +383,44 @@ class MainViewModel: ObservableObject {
             
             do {
                 todayGoals = try manager.context.fetch(request)
+                print("todayGoals: \(todayGoals)")
                 selectedToday = todayGoals.first
             } catch let error {
                 print("Error fetching coredata: \(error.localizedDescription)")
             }
         }
     }
+    
+    
+    /*
+     func getTodayGoals() {
+         print("getTodayGoals")
+         selectedToday = nil
+         let request = NSFetchRequest<GoalEntity>(entityName: "GoalEntity")
+         
+         let sort = NSSortDescriptor(keyPath: \GoalEntity.dueDate, ascending: true)
+          request.sortDescriptors = [sort]
+         
+         let dateFrom = Calendar.current.startOfDay(for: Date())
+         if let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom) {
+             let fromFilter = NSPredicate(format: "trainings.dueDate >= %@", dateFrom as CVarArg) //ANY
+             let toFilter = NSPredicate(format: "trainings.dueDate < %@", dateTo as CVarArg)
+             let filter = NSCompoundPredicate(andPredicateWithSubpredicates: [fromFilter, toFilter])
+             //request.predicate = filter
+             
+             let filterGoal = NSPredicate(format: "isCompleted == false")
+             request.predicate = filterGoal
+             
+             do {
+                 todayGoals = try manager.context.fetch(request)
+                 print("todayGoals: \(todayGoals)")
+                 selectedToday = todayGoals.first
+             } catch let error {
+                 print("Error fetching coredata: \(error.localizedDescription)")
+             }
+         }
+     }
+     */
     
     private func getTodayTrainingFromTodayGoal(for todayGoal: GoalEntity?) {
         let request = NSFetchRequest<TrainingEntity>(entityName: "TrainingEntity")

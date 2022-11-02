@@ -46,6 +46,36 @@ struct DetailView: View {
                         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("blackText")).withAlphaComponent(0.2)
                     }
                     
+                    
+                    HStack {
+                        VStack(spacing: 10) {
+                            Image(systemName: "stopwatch")
+                                .bold()
+                            Text(goal.targetTime.asTimeFormatted())
+                        }
+                        Spacer()
+                        Divider()
+                        Spacer()
+                        VStack(spacing: 10) {
+                            Image(systemName: "flag")
+                                .bold()
+                            Text("\(String(format: "%.0f", goal.target)) Mt")
+                        }
+                        Spacer()
+                        Divider()
+                        Spacer()
+                        VStack(spacing: 10) {
+                            Image(systemName: "calendar")
+                                .bold()
+                            Text(dateFormatted(goal.dueDate ?? Date()))
+                        }
+                        
+                    }
+                    .padding(15)
+                    .background(Color("cardColor"))
+                    .cornerRadius(10)
+                    .padding()
+                    
                     ForEach(vm.currentTrainingSheet) { training in
                         NavigationLink {
                             TrainingResultView(training: training)

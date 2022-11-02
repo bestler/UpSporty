@@ -14,7 +14,7 @@ struct DetailTrainingView: View {
     @State private var repCount : Int = 0;
     @State private var target : String = "";
     @State private var showAlert  = false;
-    
+    @FocusState private var distanceInFocus: Bool
 
     
     var body: some View {
@@ -68,6 +68,7 @@ struct DetailTrainingView: View {
                                     .keyboardType(.decimalPad)
                                     .disableAutocorrection(true)
                                     .multilineTextAlignment(.trailing)
+                                    .focused($distanceInFocus)
                                     .foregroundColor(Color("blackText"))
                                     .font(.system(size: 20))
                             }
@@ -82,7 +83,7 @@ struct DetailTrainingView: View {
             .navigationTitle("Exercise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                ToolbarItem(placement: .confirmationAction){
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Save"){
                         print(target)
                         if(Int(target) ?? 0 <= 0){
@@ -98,6 +99,16 @@ struct DetailTrainingView: View {
                         }
 
                     }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button {
+                            distanceInFocus = false
+                        } label: {
+                            
+                            Text("Done")
+                        
+                        }
                 }
             }
         }
