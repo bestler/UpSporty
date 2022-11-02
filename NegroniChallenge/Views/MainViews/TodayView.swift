@@ -62,7 +62,7 @@ struct TodayView: View {
                             List {
                                     Section {
                                         if let goal = vm.goalToShow {
-                                            GoalCardTodayView(goal: goal)
+                                            GoalCardTodayView(goal: goal, progress: vm.calculateChallengeProgress(dueDate: goal.dueDate!, createdDate: goal.createDate!))
                                         }
                                     }
                                     Section{
