@@ -33,7 +33,7 @@ struct DetailView: View {
                 VStack(spacing: 20) {
                     TabView {
                         if let dueDate = goal.dueDate, let createdDate = goal.createDate {
-                            CircularGraphView(progress: vm.calculateChallengeProgress(dueDate: dueDate, createdDate: goal.createDate ?? Date()), colored: sport?.sportColor ?? Color.blue, totalDays: dueDate.days(from: Date()), completedDays: Date().days(from: createdDate))
+                            CircularGraphView(progress: vm.calculateChallengeProgress(dueDate: dueDate, createdDate: goal.createDate ?? Date()), colored: sport?.sportColor ?? Color.blue, totalDays: Calendar.current.numberOfDaysBetween(Date(), and: dueDate), completedDays: Calendar.current.numberOfDaysBetween(Date(), and: createdDate))
                         }
                         ChartTrainingPerDayView(goal: goal).environmentObject(vm)
                         AssesmentsChartView(performanceChartData: vm.getAssesmentsResult(for: goal))

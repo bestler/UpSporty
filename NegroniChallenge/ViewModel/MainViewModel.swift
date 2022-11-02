@@ -539,10 +539,14 @@ class MainViewModel: ObservableObject {
     
     func calculateChallengeProgress(dueDate: Date, createdDate: Date) -> CGFloat{
         let totalDays = Double(Calendar.current.numberOfDaysBetween(dueDate, and: createdDate))
-
         let daysLeft = Double(Calendar.current.numberOfDaysBetween(dueDate, and: Date()))
         let percentage = 100 - ((daysLeft / totalDays) * 100)
-        return CGFloat(percentage)
+        if percentage < 0.0 {
+            return CGFloat(0.0)
+        }else {
+            return CGFloat(percentage)
+        }
+        
     }
     
     func getAssesmentsResult(for goal: GoalEntity) -> [AssesmentResult]{
