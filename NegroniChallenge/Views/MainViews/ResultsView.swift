@@ -7,8 +7,18 @@
 
 import SwiftUI
 
+/*
+ LazyVGrid(columns: numberColumns, spacing: 20) {
+ ForEach(Array(vm.results.keys), id: \.self) { year in
+ Text(year)
+ ForEach(vm.results[year]!, id: \.self) { goal in
+ Text(SportModel.getSport(for: goal.sportID)?.sportName.rawValue ?? "")
+ }
+ }
+ */
+
 struct ResultsView: View {
-    
+    @EnvironmentObject var vm: MainViewModel
     let screenWidth  = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
@@ -17,7 +27,7 @@ struct ResultsView: View {
     private let numberColumns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
-        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     
     let numberOfColumns: Int = 3
@@ -29,53 +39,46 @@ struct ResultsView: View {
                 Color("mainBackground")
                     .ignoresSafeArea()
                 ScrollView {
-                    HStack{
-                        Text("2002")
-                            .foregroundColor(Color("grayText"))
-                            .font(.system(size: 14))
-                        Spacer()
-                        Button(action: {
-                            //This should filter
-                        }) {
-                            Image(systemName: "line.3.horizontal.decrease.circle")
-                                .font(.system(size: 18))
+                    ForEach(Array(vm.results.keys), id: \.self) { year in
+                        HStack{
+                            Text(year)
+                                .foregroundColor(.secondary)
+                                .font(.headline)
+                            Spacer()
                         }
+                        .padding(.horizontal)
+                        LazyVGrid(columns: numberColumns, spacing: 10) {
+                        ForEach(vm.results[year]!, id: \.self) { goal in
+                                ResultsCardView(goal: goal)
+                                .frame(width: 150, height: 150)
+                            }
+                        }
+                        .padding(.top, -20)
                     }
-                    .padding(.horizontal)
-                    LazyVGrid(columns: numberColumns, spacing: 20){
-//                        ForEach(goalCardAtAll) { goalCard in
-//                            ZStack{
-//                                Rectangle()
-//                                    .foregroundColor(Color("cardColor"))
-//                                    .cornerRadius(20)
-//                                VStack {
-//                                    Image(systemName: goalCard.sportIcon)
-//                                        .foregroundColor(goalCard.sportColor)
-//                                        .font(.system(size: 45))
-//                                    Text("\(goalCard.sportName)")
-//                                        .foregroundColor(Color("blackText"))
-//                                        .font(.system(size: 17, weight: .medium, design: .rounded))
-//                                    Text("\(goalCard.yearCompletion)")
-//                                        .foregroundColor(Color("grayText"))
-//                                        .font(.system(size: 12, weight: .medium, design: .rounded))
-//                                }
-//                                Image(systemName: "medal.fill")
-//                                    .foregroundColor(.green)
-//                                    .font(.system(size: 20))
-//                                    .frame(width: screenWidth/CGFloat(numberOfColumns)-41, height: screenWidth/CGFloat(numberOfColumns)-41, alignment: .topTrailing)
-//                            }
-//                            .frame(width: screenWidth/CGFloat(numberOfColumns)-21, height: screenWidth/CGFloat(numberOfColumns)-21)
-//                        }
-                    }.padding(.horizontal)
                 }
-                
-            }.navigationTitle("Results")
+            }
+            .navigationTitle("Results")
+            .onAppear {
+                vm.getGoalResults()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        //This should filter
+                    }) {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .font(.system(size: 18))
+                    }
+                }
+            }
         }
+        
     }
 }
 
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
         ResultsView()
+            .environmentObject(MainViewModel())
     }
 }

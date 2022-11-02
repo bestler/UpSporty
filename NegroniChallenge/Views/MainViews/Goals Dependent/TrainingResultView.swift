@@ -11,7 +11,9 @@ struct TrainingResultView: View {
     @EnvironmentObject var vm: MainViewModel
     let training: TrainingEntity
     var body: some View {
-        VStack {
+        ZStack {
+                Color("mainBackground")
+                    .ignoresSafeArea()
             List {
                 ForEach(vm.currentResultTraining) { result in
                     Section {
@@ -23,6 +25,7 @@ struct TrainingResultView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
             .navigationBarTitle(Text("Exercise title"), displayMode: .inline) //\(detail.sportName)
             .navigationBarItems(trailing:
                     Button(action: {

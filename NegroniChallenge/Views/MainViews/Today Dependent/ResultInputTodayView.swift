@@ -152,6 +152,7 @@ struct ResultInputTodayView: View {
                                     }
                                 }
                             }
+                            .scrollContentBackground(.hidden)
                         }
 
                 }
@@ -182,14 +183,14 @@ struct ResultInputTodayView: View {
         }
         .interactiveDismissDisabled()
         .onAppear {
-            print("on appear for results today training \(training)")
+            //print("on appear for results today training \(training)")
             vm.getResultFromTodayTraining(for: training)
             if !vm.selectedResultsToday.isEmpty {
                 selectedResult = vm.selectedResultsToday.first
             }
         }
         .onChange(of: selectedResult) { result in
-            print("result number: \(result?.number)")
+            //print("result number: \(result?.number)")
             if let result = result {
                 vm.updateResult(resultNumber: result.number, newResult: vm.calculateMilliseconds(hour: hoursSelection, minute: minutesSelection, second: secondsSelection, millisecond: millisecondsSelection), onSave: false)
                 hoursSelection = 0
@@ -197,9 +198,6 @@ struct ResultInputTodayView: View {
                 secondsSelection = 0
                 millisecondsSelection = 0
             }
-        }
-        .onChange(of: vm.selectedResultsToday) { newValue in
-            print("Array mutated")
         }
     }
 }

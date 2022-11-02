@@ -16,6 +16,7 @@
 		406B6BEC290BC865003AA0CD /* GoalCardTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B6BEB290BC865003AA0CD /* GoalCardTodayView.swift */; };
 		406B6BF0290EECE8003AA0CD /* ResultsEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B6BEF290EECE8003AA0CD /* ResultsEditRowView.swift */; };
 		406B6BF629107809003AA0CD /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B6BF529107809003AA0CD /* Calendar.swift */; };
+		406B6BF92911C8EC003AA0CD /* ResultsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B6BF82911C8EC003AA0CD /* ResultsCardView.swift */; };
 		40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40A0357E2907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld */; };
 		40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A035822907E8F50059F4E8 /* CoreDataManager.swift */; };
 		40A035862907EB1B0059F4E8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A035852907EB1B0059F4E8 /* MainViewModel.swift */; };
@@ -56,6 +57,7 @@
 		406B6BEB290BC865003AA0CD /* GoalCardTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardTodayView.swift; sourceTree = "<group>"; };
 		406B6BEF290EECE8003AA0CD /* ResultsEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsEditRowView.swift; sourceTree = "<group>"; };
 		406B6BF529107809003AA0CD /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		406B6BF82911C8EC003AA0CD /* ResultsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCardView.swift; sourceTree = "<group>"; };
 		40A0357F2907E07E0059F4E8 /* CoreDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		40A035822907E8F50059F4E8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		40A035852907EB1B0059F4E8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 				400581CF290AE3A700899683 /* Formatter.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		406B6BF72911C8C6003AA0CD /* Results Dependent */ = {
+			isa = PBXGroup;
+			children = (
+				406B6BF82911C8EC003AA0CD /* ResultsCardView.swift */,
+			);
+			path = "Results Dependent";
 			sourceTree = "<group>";
 		};
 		40A035812907E83F0059F4E8 /* Manager */ = {
@@ -169,6 +179,7 @@
 				BC0D4BDC290AE681007F8BDE /* Training Sheet */,
 				4DCFA3B8290720E80076CC93 /* Today Dependent */,
 				4DCFA3BB290721350076CC93 /* Goals Dependent */,
+				406B6BF72911C8C6003AA0CD /* Results Dependent */,
 				4DCFA3BC290721780076CC93 /* Extension Views */,
 			);
 			path = MainViews;
@@ -343,6 +354,7 @@
 				400581CE290AE36A00899683 /* DayString.swift in Sources */,
 				4D00CDD32906A51500142F83 /* NewGoalView.swift in Sources */,
 				BCF601582906A38F005800BF /* TabBarView.swift in Sources */,
+				406B6BF92911C8EC003AA0CD /* ResultsCardView.swift in Sources */,
 				40A035832907E8F50059F4E8 /* CoreDataManager.swift in Sources */,
 				BC9F2CEA2909D54900E7B829 /* EditTrainingView.swift in Sources */,
 				40A035802907E07E0059F4E8 /* CoreDataContainer.xcdatamodeld in Sources */,
@@ -495,14 +507,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = A653B885WN;
+				DEVELOPMENT_TEAM = 2WZJ93Q5VZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,9 +522,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.bestler.NegroniChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -524,14 +539,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = A653B885WN;
+				DEVELOPMENT_TEAM = 2WZJ93Q5VZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,9 +554,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.bestler.NegroniChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

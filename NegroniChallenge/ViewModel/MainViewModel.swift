@@ -66,6 +66,9 @@ class MainViewModel: ObservableObject {
     @Published var exercisesChartData : [TrainingsPerDay] = []
     @Published var chartData : [TrainingsPerDay] = []
     
+    //MARK: Results
+    @Published var results: [String:[GoalEntity]] = [:]
+    
     
     init() {
         getGoals()
@@ -126,6 +129,9 @@ class MainViewModel: ObservableObject {
         
         let sort = NSSortDescriptor(keyPath: \GoalEntity.dueDate, ascending: true)
         request.sortDescriptors = [sort]
+        
+        let filter = NSPredicate(format: "isCompleted == false")
+        request.predicate = filter
         
         do {
             allGoals = try manager.context.fetch(request)
@@ -343,7 +349,8 @@ class MainViewModel: ObservableObject {
         }
         saveResult()
         getTodayGoals()
-
+        allGoals.removeAll()
+        self.getGoals()
     }
     
     private func saveGoal() {
@@ -370,6 +377,10 @@ class MainViewModel: ObservableObject {
             let toFilter = NSPredicate(format: "ANY trainings.dueDate < %@", dateTo as CVarArg)
             let filter = NSCompoundPredicate(andPredicateWithSubpredicates: [fromFilter, toFilter])
             request.predicate = filter
+            
+            let filterGoal = NSPredicate(format: "isCompleted == false")
+            request.predicate = filterGoal
+            
             do {
                 todayGoals = try manager.context.fetch(request)
                 selectedToday = todayGoals.first
@@ -437,7 +448,41 @@ class MainViewModel: ObservableObject {
         return results.filter( { $0.result == 0 } )
     }
     
+    func getGoalResults() {
+        
+        let request = NSFetchRequest<GoalEntity>(entityName: "GoalEntity")
+        
+        let sort = NSSortDescriptor(keyPath: \GoalEntity.dueDate, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        let filter = NSPredicate(format: "isCompleted == true")
+        request.predicate = filter
+        
+        do {
+            let allGoals = try manager.context.fetch(request)
+            print("allGoals \(allGoals)")
+            createGoalsPerYear(goals: allGoals)
+        } catch let error {
+            print("Error fetching coredata: \(error.localizedDescription)")
+        }
+    }
     
+    private func createGoalsPerYear(goals: [GoalEntity]) {
+        results = [:]
+        var year: String = ""
+        for goal in goals {
+            let yearGoal = Calendar.current.component(.year, from: goal.dueDate!)
+            if year != String(yearGoal) {
+                year = String(yearGoal)
+            }
+            if results[year] == nil {
+                results[year] = []
+            }
+            results[year]?.append(goal)
+            
+        }
+        print("results: \(results)")
+    }
  
     private func saveTraining(goal: GoalEntity) {
         currentTrainingSheet.removeAll()
