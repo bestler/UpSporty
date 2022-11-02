@@ -12,6 +12,6 @@ struct AssesmentResult : Identifiable {
     let date : Date
     let result : Int64
     let goal : Int64
-    var resultsInMinutes : Double {return Double(result/(1000*60))}
-    var goalInMinutes : Double {return Double(goal/(1000*60))}
+    var resultsInMinutes : Double {return Double(result)/(1000.0*60.0)}
+    var goalInMinutes : Double {return Double(goal)/(1000.0*60.0)}
 }

@@ -29,7 +29,6 @@ struct AssesmentsChartView: View {
                     RuleMark(y: .value("Target", performanceChartData[0].goalInMinutes))
                         .foregroundStyle(.red)
                 }
-                .chartXAxis(.automatic)
                 .chartYAxisLabel("Result in minutes")
                 .padding(30)
             } else {
