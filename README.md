@@ -1,5 +1,5 @@
 # UpSporty
-> Created at the Apple Developer Academy from Immacolata Garofalo, Matteo Fontana, Nicola Rigoni and Simon Bestler as part of the first challenge (Negroni Challenge)
+> Created at the Apple Developer Academy from Immacolata Garofalo, Matteo Fontana, Nicola Rigoni and Simon Bestler
 
 - Developed with SwiftUI, CoreData, and the in iOS 16 new introduced Swift Charts
 
